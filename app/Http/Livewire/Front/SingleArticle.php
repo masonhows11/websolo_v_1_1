@@ -2,47 +2,46 @@
 
 namespace App\Http\Livewire\Front;
 
+use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Like;
-use App\Models\Sample;
 use App\Models\view;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class FrontSample extends Component
+class SingleArticle extends Component
 {
-    public $sample;
-    public $body;
+    public $article;
     public $is_like;
     public $like_count;
+    public $body;
     public $like_color;
     public $current_like_status;
     public $auth_id;
 
-    public function mount(Sample $sample)
+    public function mount(Article $article)
     {
-        if (View::where('sample_id', $sample->id)->where('user_id', Auth::id())->exists()) {
+        if (View::where('article_id', $article->id)->where('user_id', Auth::id())->exists()) {
         } else {
-            View::create(['article_id' => $sample->id, 'user_id' => Auth::id()]);
-            $sample->views++;
-            $sample->save();
+            View::create(['article_id' => $article->id, 'user_id' => Auth::id()]);
+            $article->views++;
+            $article->save();
         }
 
         $this->auth_id = Auth::id();
-        $this->sample = $sample;
-        $this->like_count = Like::where('sample_id', $this->sample->id)->count();
-        $this->current_like_status = Like::where('sample_id', '=', $sample->id)
+        $this->article = $article;
+        $this->like_count = Like::where('article_id', $this->article->id)->count();
+        $this->current_like_status = Like::where('article_id', '=', $article->id)
             ->where('user_id', '=', $this->auth_id)
             ->exists();
         $this->like_color = 'color:tomato';
-
     }
 
     public function addLike($id)
     {
         if (Auth::check()) {
             $this->is_like = true;
-            $user_is_liked = Like::where('sample_id', '=', $id)
+            $user_is_liked = Like::where('article_id', '=', $id)
                 ->where('user_id', '=', $this->auth_id)
                 ->first();
             if ($user_is_liked) {
@@ -53,7 +52,7 @@ class FrontSample extends Component
             } else {
                 $newLike = new Like();
                 $newLike->user_id = $this->auth_id;
-                $newLike->sample_id = $this->sample->id;
+                $newLike->article_id = $this->article->id;
                 $newLike->like = $this->is_like;
                 $newLike->save();
                 $this->like_count++;
@@ -79,17 +78,18 @@ class FrontSample extends Component
         $this->validate();
         Comment::create([
             'user_id' => $this->auth_id,
-            'sample_id' => $this->sample->id,
+            'article_id' => $this->article->id,
             'body' => $this->body,
         ]);
         $this->body = null;
         session()->flash('message', 'دیدگاه شما با موفقیت ثبت شد.');
     }
+
     public function render()
     {
-        return view('livewire.front.front-sample')
+        return view('livewire.front.single-article')
             ->extends('front.include.master')
             ->section('main_content')
-            ->with(['sample' => $this->sample]);
+            ->with(['article' => $this->article]);
     }
 }

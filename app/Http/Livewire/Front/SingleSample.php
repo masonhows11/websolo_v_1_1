@@ -2,48 +2,47 @@
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Like;
-use App\Models\Training;
+use App\Models\Sample;
 use App\Models\view;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class FrontTraining extends Component
+class SingleSample extends Component
 {
-    public $training;
+    public $sample;
+    public $body;
     public $is_like;
     public $like_count;
-    public $body;
     public $like_color;
     public $current_like_status;
     public $auth_id;
 
-    public function mount(Training $training)
+    public function mount(Sample $sample)
     {
-
-        if (View::where('training_id', $training->id)->where('user_id', Auth::id())->exists()) {
+        if (View::where('sample_id', $sample->id)->where('user_id', Auth::id())->exists()) {
         } else {
-            View::create(['training_id' => $training->id, 'user_id' => Auth::id()]);
-            $training->views++;
-            $training->save();
+            View::create(['article_id' => $sample->id, 'user_id' => Auth::id()]);
+            $sample->views++;
+            $sample->save();
         }
 
         $this->auth_id = Auth::id();
-        $this->training = $training;
-        $this->like_count = Like::where('training_id', $this->training->id)->count();
-        $this->current_like_status = Like::where('training_id', '=', $training->id)
+        $this->sample = $sample;
+        $this->like_count = Like::where('sample_id', $this->sample->id)->count();
+        $this->current_like_status = Like::where('sample_id', '=', $sample->id)
             ->where('user_id', '=', $this->auth_id)
             ->exists();
         $this->like_color = 'color:tomato';
+
     }
 
     public function addLike($id)
     {
         if (Auth::check()) {
             $this->is_like = true;
-            $user_is_liked = Like::where('training_id', '=', $id)
+            $user_is_liked = Like::where('sample_id', '=', $id)
                 ->where('user_id', '=', $this->auth_id)
                 ->first();
             if ($user_is_liked) {
@@ -54,7 +53,7 @@ class FrontTraining extends Component
             } else {
                 $newLike = new Like();
                 $newLike->user_id = $this->auth_id;
-                $newLike->training_id = $this->training->id;
+                $newLike->sample_id = $this->sample->id;
                 $newLike->like = $this->is_like;
                 $newLike->save();
                 $this->like_count++;
@@ -80,7 +79,7 @@ class FrontTraining extends Component
         $this->validate();
         Comment::create([
             'user_id' => $this->auth_id,
-            'article_id' => $this->training->id,
+            'sample_id' => $this->sample->id,
             'body' => $this->body,
         ]);
         $this->body = null;
@@ -88,9 +87,9 @@ class FrontTraining extends Component
     }
     public function render()
     {
-        return view('livewire.front.front-training')
+        return view('livewire.front.single-sample')
             ->extends('front.include.master')
             ->section('main_content')
-            ->with(['training' => $this->training]);
+            ->with(['sample' => $this->sample]);
     }
 }
