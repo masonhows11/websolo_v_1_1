@@ -50,7 +50,7 @@
                                         <a href="{{ route('admin.article.edit',[$article]) }}"
                                            class="btn btn-info btn-sm me-3">ویرایش</a>
                                         <a href="javascript:void(0)" wire:click.defer="active({{$article->id}})"
-                                           class="btn btn-{{  $article->approved == 0 ? 'danger' : 'success' }} btn-sm">{{ $article->approved == 0 ? __('messages.unpublished') : __('messages.published') }}</a>
+                                           class="btn btn-{{  $article->approved == 0 ? 'danger' : 'success' }} btn-sm">{{ $article->approved == 0 ?  __('messages.unpublished') : __('messages.published') }}</a>
                                     </div>
                                 </div>
                             </div>
