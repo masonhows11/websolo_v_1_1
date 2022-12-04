@@ -13,7 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+  .sourceMaps(true,'source-map'); // for disable source-map
 // for load jquery
 mix.autoload({
     jquery: ['$','windows.$','window.jQuery']

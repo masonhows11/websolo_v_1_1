@@ -260,7 +260,7 @@ body {
 
 .heroes-img {
     position: relative;
-    background: url("/images/heroes-img-convert-2.png") no-repeat center center/cover;
+    background: url("/assets/images/heroes-img-convert-2.png") no-repeat center center/cover;
     height: 1000px;
     width: 100%;
 
@@ -313,7 +313,7 @@ body {
 }
 
 .article-wrapper {
-    *background-image: url("/images/bg-pattern-1.png");
+    *background-image: url("/assets/images/bg-pattern-1.png");
 }
 
 .sample-wrapper {
@@ -394,7 +394,7 @@ body {
 /* introduce */
 .introduce-wrapper {
     height: auto;
-    background: url("/images/bg-pattern-1.png");
+    background: url("/assets/images/bg-pattern-1.png");
 }
 .introduce-title {
     border-bottom: 2px solid #F36480;
