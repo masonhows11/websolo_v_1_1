@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\App;
 
 class GetImageName
 {
-    public static function imageName($imagePath)
+    public static function articleImage($imagePath)
     {
-        $path = 'http://websolo.test/storage/images/';
+        $path = 'http://websolo.test/storage/articles/';
         return $image = str_replace($path, '', $imagePath);
     }
+    public static function trainingImage($imagePath)
+    {
+        $path = 'http://websolo.test/storage/training/';
+        return $image = str_replace($path, '', $imagePath);
+    }
+
 
     public static function sampleMainImage($imagePath)
     {
@@ -20,7 +26,7 @@ class GetImageName
         return $image = str_replace($path, '', $imagePath);
     }
 
-    public static function samplesMultiImage($images)
+    public static function sampleMultiImage($images)
     {
 
         $img_array = array();

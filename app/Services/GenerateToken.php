@@ -4,24 +4,23 @@
 namespace App\Services;
 
 
-use App\Models\Admin;
+use App\Models\User;
 
 class GenerateToken
 {
-    public static function  generateToken()
+    public static function generateToken()
     {
-        $activation_token = mt_rand(111111,999999);
-
-        if (self::existToken($activation_token)) {
-
-            return  mt_rand(111111,999999);
+        $code = mt_rand(111111, 999999);
+        if (self::existToken($code))
+        {
+            return mt_rand(111111, 999999);
         }
-        return $activation_token;
+        return $code;
 
     }
 
-    public static function existToken($token)
+    public static function existToken($code)
     {
-        return Admin::where('token', $token)->exists();
+        return user::where('code',$code)->exists();
     }
 }
