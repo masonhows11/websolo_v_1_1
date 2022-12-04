@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'websolo.ir'),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,8 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+   // 'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -82,8 +82,8 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+   // 'locale' => 'en',
+    'locale' => 'fa',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
