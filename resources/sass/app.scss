@@ -1,0 +1,1034 @@
+// bootstrap
+@import "~bootstrap/dist/css/bootstrap.rtl.min.css";
+// font-awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+// sweet_alert2
+@import "~sweetalert2/dist/sweetalert2.min.css";
+// persian font
+@font-face {
+    font-family: 'yekan';
+    src: url("../fonts/eot/Yekan.eot") format('opentype');
+    src: url("../fonts/ttf/Yekan.ttf") format("truetype"),
+    url("../fonts/woff/Yekan.woff") format('woff');
+}
+
+@font-face {
+    font-family: 'Yekan-regular';
+    src: url('../fonts/eot/yekan-regular.eot') format('opentype');
+    src: url("../fonts/ttf/yekan-regular.ttf") format("truetype"),
+    url("../fonts/woff/yekan-regular.woff") format('woff');
+}
+
+@font-face {
+    font-family: 'BYekan';
+    src: url('../fonts/eot/BYekan.eot') format('opentype');
+    src: url('../fonts/ttf/BYekan.ttf') format('truetype');
+    src: url('../fonts/woff/BYekan.woff') format('woff');
+    font-size: larger;
+}
+
+@font-face {
+    font-family: 'iransansdn';
+    src: url("../fonts/eot/iransansdn.eot") format('opentype');
+    src: url("../fonts/ttf/iransansdn.ttf") format('truetype');
+    src: url("../fonts/woff/iransansdn.woff") format('woff');
+}
+
+@font-face {
+    font-family: 'vazir-meduim', sans-serif;
+    src: url("../fonts/eot/Vazir-Medium.eot") format('opentype');
+    src: url("../fonts/ttf/Vazir-Medium.ttf") format('truetype');
+    src: url("../fonts/woff/Vazir-Medium.woff") format('woff');
+    src: url("../fonts/woff2/Vazir-Medium.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: 'iransansbold';
+    src: url("../fonts/eot/iransansdnbold.eot") format('opentype');
+    src: url("../fonts/ttf/iransansdnbold.ttf") format('truetype');
+    src: url("../fonts/woff/iransansdnbold.woff") format('woff');
+}
+
+@font-face {
+    font-family: 'iransanslight';
+    src: url("../fonts/eot/iransansdnlight.eot") format('opentype');
+    src: url("../fonts/ttf/iransansdnlight.ttf") format('truetype');
+    src: url("../fonts/woff/iransansdnlight.woff") format('woff');
+}
+
+@font-face {
+    font-family: 'RobotoMono-Medium';
+    src: url("../fonts/ttf/RobotoMono-Medium.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'iransans_num';
+    src: url("../fonts/number/IRANSansDN_Fa_Num.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'iransans_num_bold';
+    src: url("../fonts/number/IRANSansDN_FaNum-Bold.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'iransans_num_light';
+    src: url("../fonts/number/IRANSansDN_FaNum_Light.ttf") format('truetype');
+}
+/* color flat ui */
+.w3-flat-turquoise {
+    color: #fff !important;
+    background-color: #1abc9c !important
+}
+
+.w3-flat-emerald {
+    color: #fff !important;
+    background-color: #2ecc71 !important
+}
+
+.w3-flat-peter-river {
+    color: #fff !important;
+    background-color: #3498db !important
+}
+
+.w3-flat-amethyst {
+    color: #fff !important;
+    background-color: #9b59b6 !important
+}
+
+.w3-flat-wet-asphalt {
+    color: #fff !important;
+    background-color: #34495e !important
+}
+
+.w3-flat-green-sea {
+    color: #fff !important;
+    background-color: #16a085 !important
+}
+
+.w3-flat-nephritis {
+    color: #fff !important;
+    background-color: #27ae60 !important
+}
+
+.w3-flat-belize-hole {
+    color: #fff !important;
+    background-color: #2980b9 !important
+}
+
+.w3-flat-wisteria {
+    color: #fff !important;
+    background-color: #8e44ad !important
+}
+
+.w3-flat-midnight-blue {
+    color: #fff !important;
+    background-color: #2c3e50 !important
+}
+
+.w3-flat-sun-flower {
+    color: #fff !important;
+    background-color: #f1c40f !important
+}
+
+.w3-flat-carrot {
+    color: #fff !important;
+    background-color: #e67e22 !important
+}
+
+.w3-flat-alizarin {
+    color: #fff !important;
+    background-color: #e74c3c !important
+}
+
+.w3-flat-clouds {
+    color: #000 !important;
+    background-color: #ecf0f1 !important
+}
+
+.w3-flat-concrete {
+    color: #fff !important;
+    background-color: #95a5a6 !important
+}
+
+.w3-flat-orange {
+    color: #fff !important;
+    background-color: #f39c12 !important
+}
+
+.w3-flat-pumpkin {
+    color: #fff !important;
+    background-color: #d35400 !important
+}
+
+.w3-flat-pomegranate {
+    color: #fff !important;
+    background-color: #c0392b !important
+}
+
+.w3-flat-silver {
+    color: #000 !important;
+    background-color: #bdc3c7 !important
+}
+
+.w3-flat-asbestos {
+    color: #fff !important;
+    background-color: #7f8c8d !important
+}
+// custom style
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    font-family: 'iransansdn', sans-serif;
+
+}
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    font-family: 'iransansdn', sans-serif;
+
+}
+
+.header-up-item a {
+    line-height: 1.8em;
+}
+
+.header-up-item .nav-link,
+.header-down-item-left .nav-link,
+.header-down-item-right .nav-link,
+.btn-auth-sec .btn {
+    font-family: 'iransansbold', Tahoma;
+    color: #111111;
+}
+
+.header-up-item .dropdown:hover ul.dropdown-menu {
+    display: block;
+}
+
+.header-up-item .fa-shopping-basket {
+    font-size: 1.8rem;
+    color: orangered;
+}
+
+.header-up-item .dropdown {
+    margin-left: 70px;
+}
+
+.header-up-item.btn {
+    background-color: transparent;
+}
+
+.header-up-item .dropdown-menu li a {
+    font-weight: bold;
+}
+
+.header-up-item .dropdown-menu li a:hover {
+    color: tomato;
+}
+
+.nav-up {
+    border-bottom: 2px solid #51585e;
+}
+
+.navbar-brand {
+    font-family: iransans_num_bold, sans-serif;
+    color: #3195FF !important;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.nav-sign-up .nav-link:hover,
+.nav-sign-in .nav-link:hover {
+    color: tomato;
+}
+
+/* end navbar */
+/* heroes */
+
+.heroes-img {
+    position: relative;
+    background: url("/images/heroes-img-convert-2.png") no-repeat center center/cover;
+    height: 1000px;
+    width: 100%;
+
+}
+
+.heroes-content h1,
+.heroes-content h4,
+.heroes-content h6 {
+    font-family: iransansdn, sans-serif;
+    color: #ffffff;
+}
+
+.heroes-content h1 {
+
+    font-size: 5rem;
+}
+
+.heroes-content h6 {
+    font-size: 1.5rem;
+}
+
+/* search box */
+.search-box {
+    background: #3195FF;
+    height: 100px;
+}
+
+.search-box-content .input-group-text {
+    border-color: #3195FF;
+    background: #000000;
+}
+
+.search-box-content .form-control {
+    background: #ffffff;
+    border-right: #3195FF;
+    color: #000000;
+}
+
+.search-box-content .fa-search {
+    color: #ffffff;
+}
+
+.search-box-content input[type="text"] {
+    font-family: iransansdn, sans-serif;
+}
+
+/************************ article & sample & main content */
+.main-content .card .card-footer p {
+    font-family: iransansdn, sans-serif;
+}
+
+.article-wrapper {
+    *background-image: url("/images/bg-pattern-1.png");
+}
+
+.sample-wrapper {
+    background: #3195FF;
+}
+
+.project-content-content .col-md-3,
+.sample-content .col-md-3,
+.article-content .col-md-3 {
+    margin: 20px 0 20px 0;
+}
+
+
+.section-title {
+    width: 250px;
+    border-bottom: 2px solid #3195FF;
+    padding: 30px 0 20px 0;
+    margin-bottom: 16px;
+}
+
+.sample-project .section-title {
+    border-bottom: 2px solid #ffffff;
+}
+
+.sample-project .section-title-content {
+    color: #ffffff;
+}
+.section-title-content {
+    font-family: iransansdn, sans-serif;
+    color: #3195FF;
+    font-size: 1.4rem;
+}
+
+.main-content .card-text .desc {
+    font-family: iransansdn, sans-serif;
+    color: black !important;
+    font-size: 1em;
+    text-align: justify;
+    margin: 0;
+}
+.sample-page .card-body,
+.sample-content .card-body {
+    border-top: 2px solid #1f1f1f;
+}
+.main-content img {
+    width: 100%;
+    margin-bottom: 18px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.article-content .card {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 2px solid;
+}
+.main-content .continue {
+    text-align: left;
+    margin: 0;
+}
+.main-content .continue a {
+    text-decoration: none;
+    font-family: iransansdn, sans-serif;
+    color: #3195FF;
+    background: #ffffff;
+}
+.main-content .continue a:hover {
+    background: #3195FF;
+    color: #ffffff;
+}
+.wk-article-card-footer .wk-article-continue:hover{
+    background: #3195FF;
+    color: #ffffff;
+}
+.wk-article-card-footer  .wk-article-continue{
+    margin-left:5px;
+}
+/* introduce */
+.introduce-wrapper {
+    height: auto;
+    background: url("/images/bg-pattern-1.png");
+}
+.introduce-title {
+    border-bottom: 2px solid #F36480;
+}
+.introduce-title h4 {
+    color: #ffffff;
+}
+.intro-desc,
+.intro-image {
+    margin-top: 20px;
+    height: 300px;
+    background: #1f1f1f;
+}
+.intro-desc p,
+.intro-image p {
+    padding: 20px 0 20px 0;
+    font-family: iransansdn, sans-serif;
+    font-size: larger;
+    color: #ffffff;
+}
+.intro-desc {
+    border: 2px solid #51585e;
+    border-radius: 5px;
+
+
+}
+.intro-image {
+    border: 2px solid #51585e;
+    border-radius: 5px;
+
+}
+
+/* footer */
+.footer-wrapper {
+    height: auto;
+    margin-top: auto;
+}
+.footer-project-order div a {
+    font-family: iransansdn, sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.footer-project-order div a:hover {
+    color: #ff253a;
+}
+.footer-project-order div {
+    height: 70px;
+    border-radius: 5px;
+}
+.footer-content {
+    margin-top: 20px;
+}
+.footer-content .footer-news, .footer-links {
+    height: auto;
+}
+.footer-news input[type='text'],
+.footer-news input[type='email'] {
+    text-align: right;
+    font-family: iransansdn, sans-serif;
+    font-size: 1rem;
+    color: black !important;
+}
+.footer-news .btn-light {
+    font-family: iransansdn, sans-serif;
+    background: tomato;
+    color: #e7f1ff;
+}
+.footer-project-order div {
+    border: 2px solid #51585e;
+}
+.footer-links,
+.footer-news {
+    border-bottom: 2px solid #51585e;
+}
+.footer-news label {
+    font-family: iransansdn, sans-serif;
+}
+.footer-links .enamad {
+    height: 150px;
+    width: 150px;
+    font-family: iransansdn, sans-serif;
+    color: #ffffff;
+    border: 2px solid #51585e;
+    border-radius: 5px;
+}
+.contact-us-links .fa-instagram,
+.fa-whatsapp,
+.fa-telegram {
+    color: #ffffff;
+    font-size: 2rem;
+}
+.fa-phone {
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+.contact-us-links span {
+    font-family: iransans_num, sans-serif;
+    width: 150px;
+    text-align: left;
+    direction: ltr;
+}
+.contact-link {
+    margin: 10px 0 8px 0;
+}
+.footer-copy-right {
+    color: #ffffff;
+    height: auto;
+    border-top: 2px solid #51585e;
+    margin-top: 30px;
+}
+.footer-copy-right .rule-desc {
+    font-family: iransansdn, sans-serif;
+}
+/* The side navigation menu */
+.sidenav-open {
+    display: none;
+}
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: #1f1f1f; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    /*transition: ease 0.3s; !* 0.5 second transition effect to slide in the sidenav *!*/
+}
+
+/******************** The navigation menu links *********************/
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* auth blades style */
+.login-section .btn-login,
+.register-section .btn-register {
+    width: 80px;
+    color: #ffffff;
+    font-weight: lighter !important;
+}
+.login-form ,
+.register-form ,
+.login-form-title ,
+.register-form-title{
+    border-color:#bdc3c7;
+}
+
+.profile-alert{
+    height: 70px;
+}
+.alert-section {
+    height: 100px;
+}
+
+/************** profile section ****************/
+
+.dash_menu_right_side .user-image-profile {
+    height: auto;
+    border: #bdc3c7 2px solid;
+    background-color: #ffffff;
+}
+
+.dash_menu_right_side .user-profile-menu {
+    height: auto;
+    border: #bdc3c7 2px solid;
+    background-color: #ffffff;
+}
+
+.info_dash_left_side {
+    border: #bdc3c7 2px solid;
+    background: #FFFFFF;
+    height: auto;
+}
+
+.user-dashboard-section {
+    margin: 5rem 0 5rem 0;
+
+}
+
+.user-dashboard-section .user-profile-menu li {
+    list-style: none;
+    margin-top: 1.5rem;
+}
+
+.user-dashboard-section .user-profile-menu li a {
+    text-decoration: none;
+    color: #66757F;
+}
+
+.user-image-profile .user-avatar img {
+    height: 100px;
+    width: 100px;
+
+}
+
+.user-image-profile .user-name p {
+    font-family: "RobotoMono-Medium", Tahoma, sans-serif;
+}
+
+.user-profile-menu .fa-heart,
+.user-profile-menu .fa-message,
+.user-profile-menu .fa-history,
+.user-profile-menu .fa-info-circle,
+.user-profile-menu .fa-sign-out,
+.user-profile-menu .fa-home-user,
+.user-profile-menu .fa-envelope {
+    font-size: 1.3rem;
+}
+
+.user-profile-menu .fa-heart {
+    color: #ff6347;
+}
+
+.user-profile-menu .fa-message {
+    color: #2196F3;
+}
+
+.user-profile-menu .fa-history {
+    color: #607d8b;
+}
+
+.user-profile-menu .fa-info-circle {
+    color: #0dcaf0;
+}
+
+
+.user-profile-menu .fa-sign-out {
+    color: #f44336;
+}
+.user-profile-menu .fa-trash{
+    color:tomato;
+}
+.user-profile-menu .fa-envelope {
+    color: #75ff0d;
+}
+
+.dash-index-header {
+    border-bottom: #2196F3 2px solid;
+}
+
+.dash-index-header h6 {
+    color: #2196F3;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.dash-index-info-title {
+    background: #2196F3;
+    display: inline-block;
+    color: white;
+    border: 2px solid;
+    border-radius: 7px;
+    width: 200px;
+}
+
+.dash-index-info .row {
+
+    border: #bdc3c7 2px solid;
+    border-radius: 5px;
+    padding: 8px 10px 8px 0;
+}
+
+.userAvatarFile input {
+    display:block;
+    width:200px;
+}
+
+.userAvatarFile button {
+    background:transparent;
+    cursor: pointer;
+    border: 2px #ff6347 solid;
+    border-radius: 5px;
+    padding:4px;
+
+}
+
+
+
+/**************** about us section *****************/
+.intro-webkade .intro-webkade-title h1 {
+    border-bottom: 3px solid #2196F3;
+    border-right: 3px solid #2196F3;
+    border-bottom-right-radius: 5px;
+    padding: 5px;
+}
+
+.about-sec-one .we-title {
+    color: #ffffff;
+    font-size: 5rem;
+}
+
+.inline-text-intro {
+    color: #2196F3;
+}
+
+.about-us-goal p {
+    font-size: 2rem;
+}
+
+.about-sec-three .fa-fire-alt,
+.about-sec-two .fa-fire-alt,
+.about-us-goal .fa-campground {
+    color: tomato;
+}
+
+.about-sec-two p,
+.about-sec-three p {
+    line-height: 1.8rem;
+    text-align: right;
+}
+
+/*************** contact us section ***********/
+
+
+.contact-us-section-one .social-link .social-link-item,
+.contact-us-section-one .normal-contact .normal-contact-item {
+    margin-right: 15px;
+    padding: 15px;
+    border: 1px solid #2196F3;
+    border-radius: 5px;
+}
+
+.contact-us-section-one .normal-contact-item i, .social-link-item i {
+    color: #ffffff;
+
+}
+
+.contact-us-section-one .social-link-item i:hover,
+.normal-contact-item i:hover {
+    color: #2196F3;
+}
+
+.contact-us-title {
+
+    border-bottom: 2px solid #2196F3;
+}
+
+.contact-us-call-number {
+    background: #1B344D;
+}
+
+.contact-us-section-two h5 {
+    border-right: 2px solid #2196F3;
+    padding-right: 5px;
+}
+
+.contact-us-call-number .number-one, .number-two {
+    font-family: iransans_num, sans-serif;
+    width: 100px;
+    text-align: left;
+    direction: ltr;
+}
+
+.contact-us-form {
+    background: #1B344D;
+}
+
+.write-comments-section input,
+.contact-us-form input {
+    text-align: right;
+    direction: rtl;
+}
+
+.contact-us-form input[type="text"],
+.contact-us-form input[type="email"],
+.contact-us-form textarea {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111111;
+}
+
+.contact-us-form .alert-custom {
+    border: none;
+    color: tomato;
+    height: 50px;
+}
+
+/**************** articles page *****************/
+.article-category .root-category a {
+    text-decoration: none;
+    color: #4a5562;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.article-category ul li {
+    list-style-type: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.article-category ul li a {
+    text-decoration: none;
+    color: #6E8192;
+}
+.article-category ul li a:hover {
+    color: #2196F3;
+}
+.wk-article-card-body .desc {
+    text-align: justify;
+    direction: rtl;
+    padding: 5px;
+    font-size: 15px;
+}
+.wk-article-img-card {
+    width: 100%;
+}
+.wk-article-img-card img {
+    width: 100%;
+    height: 260px;
+}
+.wk-article-card-body {
+    background: #ecf0f1;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+}
+.wk-article-card-title h5 {
+    margin-right: 5px;
+}
+.wk-article-card-footer a.continue:hover {
+    color: #2196F3;
+}
+
+/**************** article page *****************/
+.wk-post-section .wk-post-img {
+    width: 100%;
+    height: 400px;
+}
+.wk-post-section .wk-post-img img {
+    width: 100%;
+    height: 100%;
+}
+.wk-article-date,
+.wk-post-view-count,
+.wk-post-heart-count,
+.wk-post-section .wk-post-created-date {
+    font-family: iransans_num, sans-serif;
+    font-size: 1rem;
+
+}
+
+.wk-post-author-name span {
+    margin-right: 10px;
+}
+
+.wk-post-created-date span {
+    margin-left: 10px;
+
+}
+
+.wk-post-author-name .fa-pen {
+    margin-left: 5px;
+}
+
+.wk-post-title-persian h1,
+.wk-post-title-english h4 {
+    color: #222222;
+}
+
+.wk-post-description div {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.wk-post-tags-section {
+    border-top: 3px solid #222222;
+}
+
+.wk-post-tags-section .tag-title {
+    font-size: large;
+    margin-top: 5px;
+    padding: 5px 0 5px 0;
+}
+
+.wk-post-tag-name {
+    border-radius: 10px;
+    background-color: #ECF0F1;
+}
+
+.wk-post-tag-name a {
+    font-family: 'iransansbold', Tahoma;
+    color: #222222;
+    line-height: 50px;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 2px 10px 2px 10px;
+    text-decoration: none;
+}
+
+.wk-post-tag {
+    text-align: left;
+}
+
+.wk-post-like-section {
+    text-align: left;
+}
+
+.wk-post-heart-count {
+    margin-left: 8px;
+    font-size: 1.1rem;
+}
+
+.wk-post-like-section .fa-heart {
+    font-size: 1.2rem;
+}
+
+/**************** samples page *****************/
+.wk-sample-card .wk-sample-short-desc {
+    border-bottom: 3px solid #ECF0F1;
+}
+
+.wk-sample-description div p {
+    border-right: 3px solid #ECF0F1;
+    padding-right: 5px;
+}
+
+.wk-sample-lang ul li {
+    list-style-type: none;
+}
+
+.wk-sample-like-section {
+    text-align: left;
+}
+
+.wk-sample-like-section span, i {
+    margin-left: 15px;
+}
+
+/**************** tips page *****************/
+.training-page h5 {
+    font-size: larger;
+    font-weight: bold;
+    color: tomato;
+}
+/**************** paginate section livewire *****************/
+.wk-sample-single-date,
+.list-comments-section .comment-date,
+.page-link {
+    font-family: 'iransans_num', sans-serif;
+}
+
+.list-comments-section img {
+    width: 65px;
+    height: 65px;
+}
+/**************** media query *****************/
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .nav-side li {
+        text-align: center;
+    }
+    .sidenav {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header-up-item {
+        display: none;
+    }
+    .nav-up {
+        display: flex;
+        flex-flow: row-reverse;
+    }
+    .navbar .nav-down {
+        display: none;
+    }
+    .sidenav-open {
+        display: block;
+    }
+    .sidenav-open .fa-bars {
+        color: #3195FF;
+    }
+    .nav-up {
+        border-bottom: none;
+    }
+    .nav-side li {
+        text-align: center;
+    }
+    .intro-desc p {
+        font-size: 1rem;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .normal-contact,
+    .social-link {
+        display: flex;
+        flex-direction: column !important;
+    }
+    .normal-contact .normal-contact-item,
+    .social-link .social-link-item {
+        margin: 5px 0 5px 0;
+    }
+
+    .dash-index-info .info-value{
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav-side li {
+        text-align: center;
+    }
+}
