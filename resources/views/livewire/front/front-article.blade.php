@@ -47,7 +47,7 @@
                                 <div class="col wk-post-tag">
                                     @foreach($article->tags as $tag)
                                         <span class="wk-post-tag-name">
-                                            <a href="{{ route('articles.by.tag',[$tag]) }}"> 
+                                            <a href="{{ route('articles.by.tag',[$tag]) }}">
                                                 {{ $tag->title_persian }}
                                             </a>
                                         </span>
@@ -105,7 +105,7 @@
                                     <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col">
                                         <div class="d-flex flex-start mb-4">
                                             <img class="rounded-circle shadow-1-strong me-3"
-                                                 src="{{ $comment->user->image_path  ? asset('storage/users/' . $comment->user->image_path): asset('images/users/no-user.png') }}"
+                                                 src="{{ $comment->user->image_path  ? asset('storage/users/' . $comment->user->image_path): asset('assets/images/users/no-user.png') }}"
                                                  alt="avatar"/>
                                             <div class="card w-100">
                                                 <div class="card-body p-4">

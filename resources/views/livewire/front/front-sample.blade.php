@@ -141,7 +141,7 @@
                             <img class="rounded-circle shadow-1-strong me-3"
                                  src="{{ $comment->user->image_path
                                     ? asset('storage/users/' . $comment->user->image_path)
-                                    : asset('images/users/no-user.png') }}"
+                                    : asset('assets/images/users/no-user.png') }}"
                                  alt="avatar"/>
 
                             <div class="card w-100">
