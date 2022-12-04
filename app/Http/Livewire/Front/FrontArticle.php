@@ -21,14 +21,13 @@ class FrontArticle extends Component
 
     public function mount(Article $article)
     {
-       // $article->views++;
-        if(View::where('article_id',$article->id)->where('user_id','!=',Auth::id)->exists()){
-
-        }else{
-           View::create(['article_id'=>$article->id,'user_id'=>Auth::id]);
+        if (View::where('article_id', $article->id)->where('user_id', Auth::id())->exists()) {
+        } else {
+            View::create(['article_id' => $article->id, 'user_id' => Auth::id()]);
             $article->views++;
+            $article->save();
         }
-        $article->save();
+
         $this->auth_id = Auth::id();
         $this->article = $article;
         $this->like_count = Like::where('article_id', $this->article->id)->count();
@@ -85,6 +84,7 @@ class FrontArticle extends Component
         $this->body = null;
         session()->flash('message', 'دیدگاه شما با موفقیت ثبت شد.');
     }
+
     public function render()
     {
         return view('livewire.front.front-article')

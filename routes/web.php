@@ -126,7 +126,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/resend/code', [AdminValidateController::class, 'resendCode'])->name('admin.resend.code');
 });
 
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['verify_admin','auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/logOut', [AdminAuthController::class, 'logOut'])->name('logOut');
 });
