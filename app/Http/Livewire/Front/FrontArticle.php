@@ -21,6 +21,7 @@ class FrontArticle extends Component
     public function mount(Article $article)
     {
        // $article->views++;
+        
         $article->save();
         $this->auth_id = Auth::id();
         $this->article = $article;
