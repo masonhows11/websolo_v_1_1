@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Front;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Sample;
+use App\Models\view;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -20,8 +21,13 @@ class FrontSample extends Component
 
     public function mount(Sample $sample)
     {
-        $sample->views++;
-        $sample->save();
+        if (View::where('sample_id', $sample->id)->where('user_id', Auth::id())->exists()) {
+        } else {
+            View::create(['article_id' => $sample->id, 'user_id' => Auth::id()]);
+            $sample->views++;
+            $sample->save();
+        }
+
         $this->auth_id = Auth::id();
         $this->sample = $sample;
         $this->like_count = Like::where('sample_id', $this->sample->id)->count();

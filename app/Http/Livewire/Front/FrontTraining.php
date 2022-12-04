@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Training;
+use App\Models\view;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -22,8 +23,13 @@ class FrontTraining extends Component
     public function mount(Training $training)
     {
 
-        $training->views++;
-        $training->save();
+        if (View::where('training_id', $training->id)->where('user_id', Auth::id())->exists()) {
+        } else {
+            View::create(['training_id' => $training->id, 'user_id' => Auth::id()]);
+            $training->views++;
+            $training->save();
+        }
+
         $this->auth_id = Auth::id();
         $this->training = $training;
         $this->like_count = Like::where('training_id', $this->training->id)->count();

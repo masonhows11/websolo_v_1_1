@@ -1,6 +1,6 @@
 @extends('dash.include.master')
 @section('dash_page_title')
-    مقاله جدید
+    آموزش جدید
 @endsection
 @section('dash_main_content')
     <div class="container">
