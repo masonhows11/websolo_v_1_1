@@ -119,9 +119,9 @@ Route::get('/contact-us',ContactUs::class)->name('contactUs');
 
 // admin
 Route::prefix('admin')->group(function () {
-    Route::get('/loginForm', [AdminAuthController::class, 'loginAdminForm'])->name('admin.Login.form');
+    Route::get('/logi/form', [AdminAuthController::class, 'loginAdminForm'])->name('admin.Login.form');
     Route::post('/login', [AdminAuthController::class, 'loginAdmin'])->name('admin.login');
-    Route::get('/validate/mobileForm', [AdminValidateController::class, 'validateMobileForm'])->name('admin.validate.mobile.form');
+    Route::get('/validate/mobile/form', [AdminValidateController::class, 'validateMobileForm'])->name('admin.validate.mobile.form');
     Route::post('/validate/mobile', [AdminValidateController::class, 'validateMobile'])->name('admin.validate.mobile');
     Route::post('/resend/code', [AdminValidateController::class, 'resendCode'])->name('admin.resend.code');
 });

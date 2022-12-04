@@ -46,8 +46,11 @@
                                 <div class="col px-3 tag-title">بر چسب ها :</div>
                                 <div class="col wk-post-tag">
                                     @foreach($article->tags as $tag)
-                                        <span class="wk-post-tag-name"><a
-                                                href="{{ route('articles.by.tag',[$tag]) }}">{{ $tag->title_persian }}</a></span>
+                                        <span class="wk-post-tag-name">
+                                            <a href="{{ route('articles.by.tag',[$tag]) }}"> 
+                                                {{ $tag->title_persian }}
+                                            </a>
+                                        </span>
                                     @endforeach
                                 </div>
                             </div>
@@ -96,8 +99,6 @@
                             </div>
                         </div>
 
-
-
                         <div class="row my-5 list-comments-section d-flex">
                             @if ($article->comments->where('article_id', '=', $article->id)->where('approved','=',1))
                                 @foreach ($article->comments->where('approved',1) as $comment)
@@ -120,6 +121,7 @@
                                 @endforeach
                             @endif
                         </div>
+
                     </div>
                 </div>
             @endif
