@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Front;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\view;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -21,7 +22,12 @@ class FrontArticle extends Component
     public function mount(Article $article)
     {
        // $article->views++;
-        
+        if(View::where('article_id',$article->id)->where('user_id','!=',Auth::id)->exists()){
+
+        }else{
+           View::create(['article_id'=>$article->id,'user_id'=>Auth::id]);
+            $article->views++;
+        }
         $article->save();
         $this->auth_id = Auth::id();
         $this->article = $article;
