@@ -48,7 +48,7 @@ use App\Http\Livewire\Admin\ArticleListComment;
 use App\Http\Livewire\Admin\SampleListComment;
 use App\Http\Livewire\Admin\TrainingListComment;
 
-
+use App\Http\Livewire\Front\Articles;
 use App\Http\Livewire\Front\SingleArticle;
 
 use App\Http\Livewire\Front\Samples;
@@ -102,6 +102,7 @@ Route::middleware(['web', 'auth', 'verifyUser'])->group(function () {
     Route::get('/delete/account',[RemoveAccountController::class,'destroy'])->name('delete.account');
 });
 // article sample training
+Route::get('/articles',Articles::class)->name('article.index');
 Route::get('/article/{article}',SingleArticle::class)->name('article');
 Route::get('/tag/{tag}',[TagController::class,'index'])->name('articles.by.tag');
 
