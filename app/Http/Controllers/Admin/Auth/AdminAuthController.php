@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Admin;
 use App\Notifications\AdminAuthNotification;
 use App\Rules\MobileValidationRule;
 use App\Services\GenerateToken;
@@ -30,7 +30,7 @@ class AdminAuthController extends Controller
 
         try {
             $code = GenerateToken::generateToken();
-            $admin = User::where('mobile',$request->mobile)->first();
+            $admin = Admin::where('mobile',$request->mobile)->first();
             $admin->code = $code;
             $admin->save();
             session(['admin_mobile'=>$admin->mobile]);
@@ -45,14 +45,14 @@ class AdminAuthController extends Controller
 
     public function logOut(Request $request)
     {
-        $admin = Auth::user();
+        $admin = Auth::guard('admin')->user();
         $admin->code = null;
         $admin->code_verified_at = null;
         $admin->remember_token = null;
         $admin->save();
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
-        return redirect()->route('admin.Login.form');
+        return redirect()->route('admin.login.form');
     }
 
 }

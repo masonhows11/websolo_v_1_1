@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Models\User;
+use App\Models\Admin;
 
 class GenerateToken
 {
@@ -21,6 +21,6 @@ class GenerateToken
 
     public static function existToken($code)
     {
-        return user::where('code',$code)->exists();
+        return Admin::where('code',$code)->exists();
     }
 }

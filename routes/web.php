@@ -122,64 +122,66 @@ Route::get('/contact-us',ContactUs::class)->name('contactUs');
 
 // admin
 Route::prefix('admin')->group(function () {
-    Route::get('/login/form', [AdminAuthController::class, 'loginAdminForm'])->name('admin.Login.form');
+    Route::get('/login/form', [AdminAuthController::class, 'loginAdminForm'])->name('admin.login.form');
     Route::post('/login', [AdminAuthController::class, 'loginAdmin'])->name('admin.login');
     Route::get('/validate/mobile/form', [AdminValidateController::class, 'validateMobileForm'])->name('admin.validate.mobile.form');
     Route::post('/validate/mobile', [AdminValidateController::class, 'validateMobile'])->name('admin.validate.mobile');
     Route::post('/resend/code', [AdminValidateController::class, 'resendCode'])->name('admin.resend.code');
 });
 
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin','auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
+
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/logOut', [AdminAuthController::class, 'logOut'])->name('logOut');
+
 });
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/profile', AdminProfile::class)->name('profile');
     Route::get('/change/mobile', AdminMobile::class)->name('change.mobile');
 });
 // users
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/users', AdminUsers::class)->name('users');
 });
 
 // crud roles
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/roles', AdminRoles::class)->name('roles');
 });
 // assign roles
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/roles/list/users', ListUsersForRole::class)->name('role.list.users');
     Route::get('/roles/assign/form', [AdminRoleAssignController::class, 'create'])->name('roles.assign.form');
     Route::post('/roles/assign', [AdminRoleAssignController::class, 'store'])->name('roles.assign');
 });
 // crud perms
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/perms', AdminPerms::class)->name('perms');
 });
 // assign perms
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/perms/list/users', ListUsersForPerm::class)->name('perm.list.users');
     Route::get('/perms/assign/form', [AdminPermAssignController::class, 'create'])->name('perms.assign.form');
     Route::post('/perms/assign', [AdminPermAssignController::class, 'store'])->name('perms.assign');
 });
 // categories
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/category/index', AdminCategory::class)->name('category.list');
 });
 // tags
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/tags', AdminTag::class)->name('tags');
 });
 // backEnd
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/back-end/index', AdminBackEnd::class)->name('back-ends');
 });
 // frontEnd
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/front-end/index', AdminFrontEnd::class)->name('front-ends');
 });
 // articles
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/article/index', [AdminArticleController::class, 'index'])->name('article.index');
     Route::get('/article/create', [AdminArticleController::class, 'create'])->name('article.create');
     Route::post('/article/store', [AdminArticleController::class, 'store'])->name('article.store');
@@ -187,7 +189,7 @@ Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->gr
     Route::post('/article/update', [AdminArticleController::class, 'update'])->name('article.update');
 });
 // samples
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/sample/index', [AdminSampleController::class, 'index'])->name('sample.index');
     Route::get('/sample/create', [AdminSampleController::class, 'create'])->name('sample.create');
     Route::post('/sample/store', [AdminSampleController::class, 'store'])->name('sample.store');
@@ -195,7 +197,7 @@ Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->gr
     Route::post('/sample/update', [AdminSampleController::class, 'update'])->name('sample.update');
 });
 // training
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
     Route::get('/training/index', [AdminTrainingController::class, 'index'])->name('training.index');
     Route::get('/training/create', [AdminTrainingController::class, 'create'])->name('training.create');
     Route::post('/training/store', [AdminTrainingController::class, 'store'])->name('training.store');
@@ -203,7 +205,7 @@ Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->gr
     Route::post('/training/update', [AdminTrainingController::class, 'update'])->name('training.update');
 });
 // comments
-Route::prefix('admin')->name('admin.')->middleware(['verify_admin', 'auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {
 
     Route::get('/comment/articles/index', AdminArticleComment::class)->name('comment.articles.index');
     Route::get('/comments/article', ArticleListComment::class)->name('article.comments');

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class VerifyAdmin
@@ -18,15 +19,15 @@ class VerifyAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::Check()) {
-             $auth_as_admin = Auth::user();
-            if ($auth_as_admin->hasRole('admin') && $auth_as_admin->code_verified_at != null) {
-                return $next($request);
-            }
-           return redirect()->route('home');
+
+        $auth_admin = DB::table('admins')->where('mobile',Auth::guard('admin')->user()->mobile)->first();
+        if( $auth_admin->token_verified_at == null )
+        {
+            return  redirect()->route('admin.login.form')
+                ->with(['error','کاربر گرامی ابتدا وارد سایت شوید.']);
         }
-        session()->flash('error','کاربر گرامی ابتدا وارد سایت شوید');
-        return redirect()->route('admin.Login.form');
+
+        return $next($request);
 
     }
 }

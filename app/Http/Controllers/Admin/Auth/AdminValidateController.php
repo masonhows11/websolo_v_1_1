@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\User;
 use App\Notifications\AdminAuthNotification;
 use App\Rules\MobileValidationRule;
@@ -36,8 +37,8 @@ class AdminValidateController extends Controller
             session()->forget('admin_mobile');
             return redirect()->route('admin.Login.form');
         }
-        if ($admin = User::where(['mobile'=>$request->mobile,'code'=>$request->code])->first()){
-            Auth::login($admin,$request->remember);
+        if ($admin = Admin::where(['mobile'=>$request->mobile,'code'=>$request->code])->first()){
+            Auth::guard('admin')->login($admin, $request->remember);
             session()->forget('admin_mobile');
             return  redirect()->route('admin.dashboard');
         }
@@ -49,7 +50,7 @@ class AdminValidateController extends Controller
     {
 
         try {
-            $admin = User::where('mobile', $request->number)->first();
+            $admin = Admin::where('mobile', $request->number)->first();
             $token = GenerateToken::generateToken();
             $admin->code = $token;
             $admin->save();
