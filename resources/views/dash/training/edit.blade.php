@@ -110,7 +110,7 @@
         CKEDITOR.replace('editor-text', {
           /*  language: 'fa',*/
             filebrowserImageBrowseUrl: '/file-manager/ckeditor',
-            extraPlugins : 'codesnippet,bidi',
+            extraPlugins : 'codesnippet,bidi,justify',
             codeSnippet_theme : 'monokai_sublime'
         });
         CKEDITOR.replace('short-description-editor',{
