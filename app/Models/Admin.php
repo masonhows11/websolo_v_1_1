@@ -56,9 +56,15 @@ class Admin extends Authenticatable
     {
         return $this->mobile;
     }
-    public static function getPermissionIds()
+
+    /*public static function getPermissionIds()
     {
         return Permission::all()->pluck('id');
+    }*/
+
+    public function getPermissionIds()
+    {
+        return $this->permissions->pluck('id');
     }
 
     public static function getRoleIds()

@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\User;
+use App\Models\Admin;
+
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,6 +17,6 @@ class ListUsersForRole extends Component
         return view('livewire.admin.list-users-for-role')
             ->extends('dash.include.master')
             ->section('dash_main_content')
-            ->with(['users' => User::paginate(5)]);
+            ->with(['users' => Admin::paginate(5)]);
     }
 }
