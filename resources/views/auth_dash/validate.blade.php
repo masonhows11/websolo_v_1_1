@@ -4,11 +4,13 @@
 @endsection
 @section('dash_auth_content')
     <div class="container">
+
         <div class="row d-flex justify-content-center">
             <div class="col-lg-10 col-md-10 my-2 alert-dive ">
                 @include('auth_dash.alert')
             </div>
         </div>
+
         <div class="row">
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <a href="#" class="mb-12">

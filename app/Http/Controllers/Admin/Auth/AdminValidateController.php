@@ -22,7 +22,7 @@ class AdminValidateController extends Controller
     public function validateMobile(Request $request){
 
         $request->validate([
-            'mobile' => ['required','exists:users',new MobileValidationRule],
+            'mobile' => ['required','exists:admins',new MobileValidationRule],
             'code' => ['required','digits:6']
         ],$messages = [
             'mobile.exists' => 'کاربری با شماره موبایل وارد شده وجود ندارد',

@@ -22,7 +22,7 @@ class AdminAuthController extends Controller
     public function loginAdmin(Request $request){
 
         $request->validate([
-            'mobile' => ['required','exists:users,mobile',new MobileValidationRule],
+            'mobile' => ['required','exists:admins,mobile',new MobileValidationRule],
         ],$messages =[
             'mobile.exists' => 'کاربری با شماره موبایل وارد شده وجود ندارد',
             'mobile.required' => 'شماره موبایل خود را وارد کنید',
