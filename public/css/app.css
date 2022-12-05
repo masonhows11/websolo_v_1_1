@@ -11249,13 +11249,6 @@ body {
   margin-left: 15px;
 }
 
-/**************** tips page *****************/
-.training-page h5 {
-  font-size: larger;
-  font-weight: bold;
-  color: tomato;
-}
-
 /**************** paginate section livewire *****************/
 .wk-sample-single-date,
 .list-comments-section .comment-date,
@@ -11266,6 +11259,11 @@ body {
 .list-comments-section img {
   width: 65px;
   height: 65px;
+}
+
+/**************** training page ***************/
+pre {
+  direction: ltr;
 }
 
 /**************** media query *****************/

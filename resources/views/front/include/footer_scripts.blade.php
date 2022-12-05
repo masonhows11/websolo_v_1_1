@@ -16,3 +16,6 @@
 
     })
 </script>
+<link rel="stylesheet" href="{{ asset('assets/plugins/ckeditor/plugins/codesnippet/lib/highlight/styles/dark.css') }}">
+<script type="text/javascript" src="{{ asset('assets/plugins/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
