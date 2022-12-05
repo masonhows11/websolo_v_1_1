@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Admin;
 use App\Models\BackEnd;
 use App\Models\Category;
 use App\Models\FrontEnd;
@@ -29,18 +30,29 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        // create admin
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        $admin = User::create([
-            'name' => 'naeem1992',
+        $admin = Admin::create([
+            'name' => 'naeem_sol',
             'first_name' => 'naeem',
             'last_name' => 'soltany',
             'mobile' => '09917230927',
             //'token'=>  mt_rand(111111,999999),
             //'token_verified_at' => Carbon::now(),
         ]);
-        $role_admin = Role::create(['name' => 'admin']);
+        $admin1 = Admin::create([
+            'name' => 'james_423',
+            'first_name' => 'joe',
+            'last_name' => 'james',
+            'mobile' => '09172890423',
+            //'token'=>  mt_rand(111111,999999),
+            //'token_verified_at' => Carbon::now(),
+        ]);
+
+        $role_admin = Role::create(['guard_name' => 'admin', 'name' => 'admin']);
         $admin->assignRole($role_admin);
 
+        // create users
         $user = User::create([
             'name' => 'mason11',
             'first_name' => 'mason',
