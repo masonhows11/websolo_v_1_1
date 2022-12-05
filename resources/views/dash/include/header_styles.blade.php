@@ -4,4 +4,6 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/chosen/chosen.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/file-manager/css/file-manager.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/toastify/toastify.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/ckeditor/plugins/codesnippet/lib/highlight/styles/arta.css') }}">
+<script type="text/javascript" src="{{ asset('assets/plugins/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">

@@ -99,9 +99,11 @@
     </div>
 @endsection
 @push('dash_custom_scripts')
-    <link rel="stylesheet" href="{{ asset('assets/plugins/ckeditor/plugins/codesnippets/lib/highlight/styles/default.css') }}">
+
     <script type="text/javascript" src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
     <script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
     <script>
         // ckeditor
