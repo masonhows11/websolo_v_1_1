@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -48,7 +49,8 @@ class ArticleController extends Controller
     {
 
 
-        /*$is_like = null;
+        $article = Article::findOrFail($request->id);
+        $is_like = null;
         $like_count = null;
         $current_like_status = null;
         $auth_id = null;
@@ -60,21 +62,15 @@ class ArticleController extends Controller
                 ->first();
             if ($user_is_liked) {
                 $user_is_liked->delete();
-                $like_count--;
-                $current_like_status = false;
-                $like_color = null;
             } else {
                 $newLike = new Like();
                 $newLike->user_id = $auth_id;
-                $newLike->training_id = $training->id;
+                $newLike->article_id = $article->id;
                 $newLike->like = $is_like;
                 $newLike->save();
-                $this->like_count++;
-                $this->current_like_status = true;
-                $this->like_color = 'color:tomato';
             }
         } else {
             return redirect('/login/form');
-        }*/
+        }
     }
 }
