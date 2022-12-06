@@ -35,9 +35,12 @@
                                     <span class="wk-post-view-count">{{ $training->views }}</span>
                                     <i class="fa-solid fa-eye"></i>
                                     <span class="wk-post-heart-count">{{$like_count}}</span>
-                                    <i wire:click="addLike({{$training->id}})" class="{{ $current_like_status ? 'fas' : 'far' }}  fa-heart" style="{{ $current_like_status ? $like_color : '' }}"></i>
+                                    <i wire:click="addLike({{$training->id}})"
+                                       class="{{ $current_like_status ? 'fas' : 'far' }}  fa-heart"
+                                       style="{{ $current_like_status ? $like_color : '' }}"></i>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="row d-flex justify-content-center write-comments-section my-4">

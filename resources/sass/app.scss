@@ -879,22 +879,15 @@ body {
     text-align: justify;
     font-size: 16px;
 }
-
-.wk-post-tags-section {
-    border-top: 3px solid #222222;
-}
-
 .wk-post-tags-section .tag-title {
     font-size: large;
     margin-top: 5px;
     padding: 5px 0 5px 0;
 }
-
 .wk-post-tag-name {
     border-radius: 10px;
     background-color: #ECF0F1;
 }
-
 .wk-post-tag-name a {
     font-family: 'iransansbold', Tahoma;
     color: #222222;
@@ -911,6 +904,9 @@ body {
 
 .wk-post-like-section {
     text-align: left;
+}
+.wk-post-like-section .col{
+    border-bottom: 3px solid #222222;
 }
 
 .wk-post-heart-count {

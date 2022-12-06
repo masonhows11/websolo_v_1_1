@@ -11185,10 +11185,6 @@ body {
   font-size: 16px;
 }
 
-.wk-post-tags-section {
-  border-top: 3px solid #222222;
-}
-
 .wk-post-tags-section .tag-title {
   font-size: large;
   margin-top: 5px;
@@ -11216,6 +11212,10 @@ body {
 
 .wk-post-like-section {
   text-align: left;
+}
+
+.wk-post-like-section .col {
+  border-bottom: 3px solid #222222;
 }
 
 .wk-post-heart-count {
