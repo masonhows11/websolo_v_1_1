@@ -10,6 +10,6 @@ class TrainingController extends Controller
     //
     public function training(Training $training)
     {
-        return view('front.training.single_training');
+        return view('front.training.single_training')->with(['training'=>$training]);
     }
 }
