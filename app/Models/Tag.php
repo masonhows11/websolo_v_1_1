@@ -17,4 +17,9 @@ class Tag extends Model
             ->generateSlugsFrom('title_persian')
             ->saveSlugsTo('slug');
     }
+
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class);
+    }
 }
