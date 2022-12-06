@@ -49,13 +49,12 @@ use App\Http\Livewire\Admin\SampleListComment;
 use App\Http\Livewire\Admin\TrainingListComment;
 
 use App\Http\Controllers\ArticleController;
-use App\Http\Livewire\Front\SingleArticle;
 
 use App\Http\Livewire\Front\Samples;
-use App\Http\Livewire\Front\SingleSample;
+use App\Http\Controllers\SampleController;
 
 use App\Http\Livewire\Front\Trainings;
-use App\Http\Livewire\Front\SingleTraining;
+use App\Http\Controllers\TrainingController;
 
 use App\Http\Livewire\AboutUs;
 use App\Http\Livewire\ContactUs;
@@ -104,15 +103,15 @@ Route::middleware(['web', 'auth', 'verifyUser'])->group(function () {
 // article sample training
 Route::get('/articles',[ArticleController::class,'index'])->name('article.index');
 Route::get('/articles/{category}',[ArticleController::class,'articleCategory'])->name('article.category');
-Route::get('/article/{article}',SingleArticle::class)->name('article');
+Route::get('/article/{article}',[ArticleController::class,'article'])->name('article');
 
 Route::get('/tag/{tag}',[TagController::class,'index'])->name('articles.by.tag');
 
 Route::get('/samples',Samples::class)->name('sample.index');
-Route::get('/sample/{sample}',SingleSample::class)->name('sample');
+Route::get('/sample/{sample}',[SampleController::class,'sample'])->name('sample');
 
 Route::get('/trainings',Trainings::class)->name('training.index');
-Route::get('/training/{training}',SingleTraining::class)->name('training');
+Route::get('/training/{training}',[TrainingController::class,'training'])->name('training');
 
 
 

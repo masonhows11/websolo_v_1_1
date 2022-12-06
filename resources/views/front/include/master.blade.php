@@ -6,7 +6,7 @@
     <title>@yield('page_title')</title>
     <link rel="icon" type="image/x-icon" href="#">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.ico') }}"/>
     @include('front.include.header_styles')
     @livewireStyles
 </head>

@@ -17,7 +17,8 @@ class ArticleController extends Controller
     }
     public function article(Article $article)
     {
-        return view('front.article.single_article')
+
+        return view('front.article.article')
             ->with(['article'=>$article]);
     }
 

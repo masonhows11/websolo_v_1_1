@@ -21,7 +21,7 @@ class TrainingController extends Controller
              $training->views++;
              $training->save();
          }*/
-        return view('front.training.single_training')->with(['training' => $training]);
+        return view('front.training.training')->with(['training' => $training]);
     }
 
     public function addComment(Request $request)

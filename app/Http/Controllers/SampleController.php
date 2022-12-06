@@ -11,7 +11,7 @@ class SampleController extends Controller
     //
     public function sample(Sample $sample)
     {
-        return view('front.sample.single_sample')
+        return view('front.sample.sample')
             ->with(['sample'=>$sample]);
     }
     public function addComment(Request $request)
