@@ -10,7 +10,6 @@
             </div>
             <div class="col-md-10">
                 <div class="row  row-cols-xxl-3 row-cols-xl-3 row-cols-lg-3 row-cols-md-2 row-cols-1  articles-page">
-                    @if (isset($articles))
                         @if ($articles->count())
                             @foreach ($articles as $article)
                                 <div class="col my-2">
@@ -35,7 +34,6 @@
                                 </div>
                             @endforeach
                         @endif
-                    @endif
                 </div>
                 <div class="row d-flex justify-content-center">
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 d-flex justify-content-center">
