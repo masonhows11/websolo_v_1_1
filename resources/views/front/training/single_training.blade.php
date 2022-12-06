@@ -1,4 +1,7 @@
-<div>
+@extends('front.include.master')
+@section('page_title')
+@endsection
+@section('main_content')
     <div class="container">
         @if(isset($training))
             @if($training->count() != null)
@@ -114,4 +117,4 @@
             @endif
         @endif
     </div>
-</div>
+@endsection

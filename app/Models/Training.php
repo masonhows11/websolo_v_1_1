@@ -27,7 +27,7 @@ class Training extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Admin::class);
     }
     public function likes()
     {
