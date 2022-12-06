@@ -52,7 +52,8 @@
                                 </div>
                                 <input type="text" id="image_label"
                                        class="form-control @error('image') is-invalid @enderror" name="image"
-                                       aria-label="Image" aria-describedby="button-image" value="{{ $training->image }}" readonly>
+                                       aria-label="Image" aria-describedby="button-image" value="{{ $training->image }}"
+                                       readonly>
                             </div>
                             @error('image')
                             <div class="my-5 alert alert-danger">
@@ -108,12 +109,12 @@
     <script>
         // ckeditor
         CKEDITOR.replace('editor-text', {
-          /*  language: 'fa',*/
+            /*  language: 'fa',*/
             filebrowserImageBrowseUrl: '/file-manager/ckeditor',
             extraPlugins : 'codesnippet,bidi,justify',
-            codeSnippet_theme : 'monokai_sublime'
+              codeSnippet_theme : 'monokai_sublime'
         });
-        CKEDITOR.replace('short-description-editor',{
+        CKEDITOR.replace('short-description-editor', {
             language: 'fa',
             removePlugins: 'image',
         })
@@ -129,6 +130,7 @@
         function fmSetLink($url) {
             document.getElementById('image_label').value = $url;
         }
+
         // chosen
         $('.chosen-select').chosen({rtl: true, width: "100%"})
     </script>
