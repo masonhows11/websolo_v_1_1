@@ -38,12 +38,11 @@
                                 <span class="wk-post-view-count">{{ $article->views }}</span>
                                 <i class="fa-solid fa-eye"></i>
                                 <span class="wk-post-heart-count"></span>
-                                <i class=" far fa-heart" style=""></i>
+                                <i class="far fa-heart" style="" id="add-like" data-article="{{ $article->id }}"></i>
                             </div>
                         </div>
 
                     </div>
-
                     <div class="row d-flex justify-content-center write-comments-section my-4">
                         <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-9">
                             <form>
@@ -84,8 +83,6 @@
                             </form>
                         </div>
                     </div>
-
-
                     <div class="row my-5 list-comments-section d-flex">
                         @if ($article->comments->where('article_id', '=', $article->id)->where('approved','=',1))
                             @foreach ($article->comments->where('approved',1) as $comment)
@@ -116,9 +113,12 @@
 @push('front_custom_scripts')
     <script>
         $(document).ready(function () {
+            $(document).on('click','#add-like',function (e) {
+                let article_id = e.target.getAttribute('data-article');
+                // console.log(article_id);
 
-            
 
+            });
         });
     </script>
 @endpush

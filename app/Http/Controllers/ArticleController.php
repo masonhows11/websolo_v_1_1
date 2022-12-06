@@ -49,16 +49,15 @@ class ArticleController extends Controller
     {
 
 
-        $article = Article::findOrFail($request->id);
+       $article = Article::findOrFail($request->id);
         $is_like = null;
-        $like_count = null;
         $current_like_status = null;
-        $auth_id = null;
+        $auth_id = Auth::id();
 
         if (Auth::check()) {
             $is_like = true;
             $user_is_liked = Like::where('training_id', '=', $request->id)
-                ->where('user_id', '=', $this->auth_id)
+                ->where('user_id', '=', $auth_id)
                 ->first();
             if ($user_is_liked) {
                 $user_is_liked->delete();
