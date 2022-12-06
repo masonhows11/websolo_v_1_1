@@ -1,4 +1,7 @@
-<div>
+@extends('front.include.master')
+@section('page_title')
+@endsection
+@section('main_content')
     <div class="container">
         @if (isset($sample))
             @if ($sample->count() != null)
@@ -161,4 +164,4 @@
         </div>
 
     </div>
-</div>
+@endsection

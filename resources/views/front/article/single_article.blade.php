@@ -1,59 +1,49 @@
-<div>
+@extends('front.include.master')
+@section('page_title')
+@endsection
+@section('main_content')
     <div class="container">
-        @if(isset($article))
-            @if($article->count() != null)
+        @if(isset($training))
+            @if($training->count() != null)
                 <div class="row my-5">
                     <div class="col-md-6  h-75">
                         <div class="wk-post-section my-3">
                             <div class="row d-flex flex-column wk-post-title">
                                 <div class="col wk-post-title-persian">
-                                    <h1> {{ $article->title_persian }}</h1>
+                                    <h1> {{ $training->title_persian }}</h1>
                                 </div>
                                 <div class="col d-flex justify-content-end  wk-post-title-english">
-                                    <h4> {{ $article->title_english }}</h4>
+                                    <h4> {{ $training->title_english }}</h4>
                                 </div>
                             </div>
                             <div class="wk-post-img">
-                                <img src="{{ asset('/storage/articles/'.$article->image) }}" class="rounded-4" alt="post-image">
+                                <img src="{{ asset('/storage/training/'.$training->image) }}" class="rounded-4" alt="post-image">
                             </div>
                             <div class="d-flex  justify-content-between mt-2 border border-2 rounded-3 wk-post-author-info">
                                 <div class="wk-post-author-name py-3">
-                                    <span class=""><i class="fas fa-pen"></i>{{ $article->user->name }}</span>
+                                    <span class=""><i class="fas fa-pen"></i>{{ $training->user->name }}</span>
                                 </div>
                                 <div class="wk-post-created-date  py-3">
-                                    <span class=""> {{ jdate($article->created_at)->ago() }}</span>
+                                    <span class=""> {{ jdate($training->created_at)->ago() }}</span>
                                 </div>
                             </div>
                             <div class="row d-flex my-4 justify-content-center wk-post-description">
                                 <div class="col">
-                                    {!! $article->description !!}
+                                    {!! $training->description !!}
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-between wk-post-like-section">
                                 <div class="col">
-                                    <span class="wk-post-view-count">{{ $article->views }}</span>
+                                    <span class="wk-post-view-count">{{ $training->views }}</span>
                                     <i class="fa-solid fa-eye"></i>
                                     <span class="wk-post-heart-count">{{$like_count}}</span>
-                                    <i wire:click.defer="addLike({{$article->id}})"
+                                    <i wire:click="addLike({{$training->id}})"
                                        class="{{ $current_like_status ? 'fas' : 'far' }}  fa-heart"
-                                       style="{{ $current_like_status ? $like_color : '' }}">
-                                    </i>
+                                       style="{{ $current_like_status ? $like_color : '' }}"></i>
                                 </div>
                             </div>
 
-                            <div class="row d-flex flex-column wk-post-tags-section">
-                                <div class="col px-3 tag-title">بر چسب ها :</div>
-                                <div class="col wk-post-tag">
-                                    @foreach($article->tags as $tag)
-                                        <span class="wk-post-tag-name">
-                                            <a href="{{ route('articles.by.tag',[$tag]) }}">
-                                                {{ $tag->title_persian }}
-                                            </a>
-                                        </span>
-                                    @endforeach
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row d-flex justify-content-center write-comments-section my-4">
@@ -64,8 +54,7 @@
                                             <div
                                                 class="alert alert-success alert-component d-flex justify-content-between">
                                                 {{ session('message') }}
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                        aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>
                                         @endif
                                     </div>
@@ -99,9 +88,11 @@
                             </div>
                         </div>
 
+
+
                         <div class="row my-5 list-comments-section d-flex">
-                            @if ($article->comments->where('article_id', '=', $article->id)->where('approved','=',1))
-                                @foreach ($article->comments->where('approved',1) as $comment)
+                            @if ($training->comments->where('article_id', '=', $training->id)->where('approved','=',1))
+                                @foreach ($training->comments->where('approved',1) as $comment)
                                     <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col">
                                         <div class="d-flex flex-start mb-4">
                                             <img class="rounded-circle shadow-1-strong me-3"
@@ -121,10 +112,9 @@
                                 @endforeach
                             @endif
                         </div>
-
                     </div>
                 </div>
             @endif
         @endif
     </div>
-</div>
+@endsection

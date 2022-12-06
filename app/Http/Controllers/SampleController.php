@@ -3,27 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Like;
-use App\Models\Training;
-use App\Models\view;
+use App\Models\Sample;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class TrainingController extends Controller
+class SampleController extends Controller
 {
     //
-
-    public function training(Training $training)
+    public function sample(Sample $sample)
     {
-        /* if (View::where('training_id', $training->id)->where('user_id', Auth::id())->exists()) {
-         } else {
-             View::create(['training_id' => $training->id, 'user_id' => Auth::id()]);
-             $training->views++;
-             $training->save();
-         }*/
-        return view('front.training.single_training')->with(['training' => $training]);
+        return view('front.sample.single_sample')
+            ->with(['sample'=>$sample]);
     }
-
     public function addComment(Request $request)
     {
         $request->validate([
