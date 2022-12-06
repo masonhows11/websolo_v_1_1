@@ -104,6 +104,8 @@ Route::middleware(['web', 'auth', 'verifyUser'])->group(function () {
 Route::get('/articles',[ArticleController::class,'index'])->name('article.index');
 Route::get('/articles/{category}',[ArticleController::class,'articleCategory'])->name('article.category');
 Route::get('/article/{article}',[ArticleController::class,'article'])->name('article');
+Route::post('/article/comment',[ArticleController::class,'addComment'])->name('article.comment');
+Route::post('/article/like',[ArticleController::class,'addLike'])->name('article.like');
 
 Route::get('/tag/{tag}',[TagController::class,'index'])->name('articles.by.tag');
 
