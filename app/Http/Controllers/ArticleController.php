@@ -63,11 +63,9 @@ class ArticleController extends Controller
     public function addLike(Request $request)
     {
 
-        // return $request;
         $article = Article::findOrFail($request->id);
         $auth_id = Auth::id();
         $is_like = $request['is_liked'] === 'true';
-
         try {
             $user_is_liked = Like::where('article_id', '=', $request->id)
                 ->where('user_id', '=', $auth_id)

@@ -37,10 +37,16 @@
                             <div class="col">
                                 <span class="wk-post-view-count">{{ $article->views }}</span>
                                 <i class="fa-solid fa-eye"></i>
-                                <span class="wk-post-heart-count" id="like-count">{{ $article->likes()->count() }}</span>
+                                <span class="wk-post-heart-count"
+                                      id="like-count">{{ $article->likes()->count() }}</span>
                                 @auth
-                                    <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like"
-                                       data-article="{{ $article->id }}"></i>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->likes()->where(['article_id'=>$article->id,'like'=>1])->first())
+                                        <i class="fas fa-heart fa-border-style" style="color:tomato" id="add-like"
+                                           data-article="{{ $article->id }}"></i>
+                                    @else
+                                        <i class="far fa-heart" style="color:tomato" id="add-like"
+                                           data-article="{{ $article->id }}"></i>
+                                    @endif
                                 @else
                                     <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like-an-auth"
                                        data-article="{{ $article->id }}"></i>
@@ -131,7 +137,7 @@
             $(document).on('click', '#add-like', function (e) {
                 let like_btn = document.getElementById('add-like');
                 let article_id = e.target.getAttribute('data-article');
-                let is_liked = null;
+                let is_liked;
                 if (like_btn.classList.contains('far')) {
                     like_btn.classList.remove("far");
                     like_btn.classList.add("fas")
@@ -160,7 +166,7 @@
                         }
                     }
                 }).fail(function (data) {
-                    if(data['status']===500){
+                    if (data['status'] === 500) {
                         Swal.fire({
                             icon: 'danger',
                             text: 'خطایی رخ داده.',
