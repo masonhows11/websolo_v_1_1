@@ -112,20 +112,15 @@
 @endsection
 @push('front_custom_scripts')
     <script>
-
         $(document).ready(function () {
-
             // add comment
             document.getElementById('add-comment').addEventListener('submit', addComment)
-
             function addComment(e) {
                 e.preventDefault();
                 let article_id = document.getElementById('article-id').value;
                 let body = document.getElementById('body-comment').value;
                 $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                 });
                 $.ajax({
                     method: 'POST',
@@ -185,9 +180,7 @@
                     is_liked = false;
                 }
                 $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                 });
                 $.ajax({
                     method: 'POST',

@@ -59,10 +59,10 @@
                                                 @if(\Illuminate\Support\Facades\Auth::user()->likes()->where(['sample_id'=>$sample->id,'like'=>1])->first())
                                                     <i class="fas fa-heart fa-border-style" style="color:tomato"
                                                        id="add-like"
-                                                       data-article="{{ $sample->id }}"></i>
+                                                       data-sample="{{ $sample->id }}"></i>
                                                 @else
                                                     <i class="far fa-heart" style="color:tomato" id="add-like"
-                                                       data-article="{{ $sample->id }}"></i>
+                                                       data-sample="{{ $sample->id }}"></i>
                                                 @endif
                                             @else
                                                 <i class="far fa-heart fa-border-style" style="color:tomato"
@@ -114,9 +114,10 @@
                     @auth
                         <input type="hidden" id="sample-id" value="{{ $sample->id }}">
                         <div class="mb-3">
-                            <label for="message-comment" class="form-label">دیدگاه</label>
+                            <label for="body-comment" class="form-label">دیدگاه</label>
                             <textarea class="form-control"
-                                      placeholder="متن دیدگاه خود را وارد کنید." id="message-comment"
+                                      placeholder="متن دیدگاه خود را وارد کنید."
+                                      id="body-comment"
                                       rows="6">
                             </textarea>
                         </div>
@@ -217,9 +218,7 @@
                         });
                     }
                 })
-
             }
-
             // add like
             $(document).on('click', '#add-like-an-auth', function (e) {
                 Swal.fire({
@@ -227,7 +226,6 @@
                     text: 'برای ثبت like Or dislike ابتدا وارد سایت شوید.',
                 });
             })
-
             $(document).on('click', '#add-like', function (e) {
                 let like_btn = document.getElementById('add-like');
                 let sample_id = e.target.getAttribute('data-sample');
@@ -243,9 +241,7 @@
                     is_liked = false;
                 }
                 $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                 });
                 $.ajax({
                     method: 'POST',

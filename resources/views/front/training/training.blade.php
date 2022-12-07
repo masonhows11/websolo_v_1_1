@@ -117,12 +117,9 @@
 @endsection
 @push('front_custom_scripts')
     <script>
-
         $(document).ready(function () {
-
             // add comment
             document.getElementById('add-comment').addEventListener('submit', addComment)
-
             function addComment(e) {
                 e.preventDefault();
                 let training_id = document.getElementById('training-id').value;
@@ -164,7 +161,6 @@
                         });
                     }
                 })
-
             }
 
             // add like
@@ -199,7 +195,6 @@
                     url: '{{ route('training.add.like') }}',
                     data: {id: training_id, is_liked: is_liked}
                 }).done(function (data) {
-                    console.log(data);
                     if (data['status'] === 200) {
                         if (data['liked'] === 'disliked') {
                             document.getElementById('like-count').innerText = data['count'];
@@ -208,7 +203,6 @@
                         }
                     }
                 }).fail(function (data) {
-                    console.log(data);
                     if (data['status'] === 500) {
                         Swal.fire({
                             icon: 'danger',
