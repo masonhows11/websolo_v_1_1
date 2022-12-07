@@ -32,7 +32,6 @@ class SampleController extends Controller
             return  response()
                 ->json(['msg'=> $validator->errors(),'status'=>422],200);
         }
-
         if(!Sample::find($request->id)){
             return response()
                 ->json(['msg' => 'مقاله مورد نظر وجود ندارد.', 'status' => 404], 200);
@@ -47,8 +46,6 @@ class SampleController extends Controller
         }catch (\Exception $ex){
             return response()->json(['msg' => 'خطایی رخ داده.', 'status' => 500], 200);
         }
-
-
     }
 
     public function addLike(Request $request)
