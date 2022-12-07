@@ -37,7 +37,7 @@
                             <div class="col">
                                 <span class="wk-post-view-count">{{ $article->views }}</span>
                                 <i class="fa-solid fa-eye"></i>
-                                <span class="wk-post-heart-count" id="like-count">0</span>
+                                <span class="wk-post-heart-count" id="like-count">{{ $article->likes()->count() }}</span>
                                 @auth
                                     <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like"
                                        data-article="{{ $article->id }}"></i>
@@ -152,7 +152,6 @@
                     url: '{{ route('article.add.like') }}',
                     data: {id: article_id, is_liked: is_liked}
                 }).done(function (data) {
-                    console.log(data);
                     if (data['status'] === 200) {
                         if (data['liked'] === 'disliked') {
                             document.getElementById('like-count').innerText = data['count'];
@@ -161,7 +160,6 @@
                         }
                     }
                 }).fail(function (data) {
-                    console.log(data);
                     if(data['status']===500){
                         Swal.fire({
                             icon: 'danger',
