@@ -8,7 +8,8 @@
                 <div class="row my-3 wk-sample-section w3-flat-midnight-blue rounded-3">
                     <div class="col-xxl-12 col-xl-10 col-lg-10 col-md-10 my-2">
 
-                        <div class="row row-cols-xxl-2 row-cols-xl-2 row-cols-lg-2 row-cols-md-2 row-cols-1 wk-sample-card mb-3 mt-3">
+                        <div
+                            class="row row-cols-xxl-2 row-cols-xl-2 row-cols-lg-2 row-cols-md-2 row-cols-1 wk-sample-card mb-3 mt-3">
 
                             <div class="col my-5 wk-sample-main-image">
                                 <img src="{{ asset('storage/samples/' . $sample->main_image) }}" loading="lazy"
@@ -48,11 +49,25 @@
                                             <p class="wk-sample-single-date">ایجاد شده در تاریخ
                                                 : {{ JDate($sample->created_at)->format('Y/m/d')}}</p>
                                         </div>
+
                                         <div class="col wk-sample-like-section">
                                             <span class="wk-post-view-count">{{ $sample->views }}</span>
                                             <i class="fa-regular fa-eye"></i>
-                                            <span class="wk-post-heart-count">{{$like_count}}</span>
-                                            <i wire:click="addLike({{$sample->id}})" class="{{ $current_like_status ? 'fas' : 'far' }}  fa-heart" style="{{ $current_like_status ? $like_color : '' }}"></i>
+                                            <span class="wk-post-heart-count" id="like-count">{{ $sample->likes()->count() }}</span>
+
+                                            @auth
+                                                @if(\Illuminate\Support\Facades\Auth::user()->likes()->where(['sample_id'=>$sample->id,'like'=>1])->first())
+                                                    <i class="fas fa-heart fa-border-style" style="color:tomato"
+                                                       id="add-like"
+                                                       data-article="{{ $sample->id }}"></i>
+                                                @else
+                                                    <i class="far fa-heart" style="color:tomato" id="add-like"
+                                                       data-article="{{ $sample->id }}"></i>
+                                                @endif
+                                            @else
+                                                <i class="far fa-heart fa-border-style" style="color:tomato"
+                                                   id="add-like-an-auth" data-sample="{{ $sample->id }}"></i>
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +125,8 @@
                         </div>
                     @else
                         <div class="mb-3">
-                            <a href="{{ route('register.form') }}" class="btn btn-outline-primary">برای ارسال دیگاه ابتدا
+                            <a href="{{ route('register.form') }}" class="btn btn-outline-primary">برای ارسال دیگاه
+                                ابتدا
                                 برای ارسال
                                 دیگاه ابتدا
                                 وارد سایت
@@ -162,7 +178,7 @@
 
             function addComment(e) {
                 e.preventDefault();
-                let article_id = document.getElementById('article-id').value;
+                let article_id = document.getElementById('sample-id').value;
                 let body = document.getElementById('body-comment').value;
                 $.ajaxSetup({
                     headers: {
@@ -171,7 +187,7 @@
                 });
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route('article.addComment') }}',
+                    url: '{{ route('sample.addComment') }}',
                     data: {id: article_id, body: body}
                 }).done(function (data) {
                     if (data['status'] === 422) {
@@ -214,7 +230,7 @@
 
             $(document).on('click', '#add-like', function (e) {
                 let like_btn = document.getElementById('add-like');
-                let article_id = e.target.getAttribute('data-article');
+                let sample_id = e.target.getAttribute('data-sample');
                 let is_liked;
                 if (like_btn.classList.contains('far')) {
                     like_btn.classList.remove("far");
@@ -233,8 +249,8 @@
                 });
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route('article.add.like') }}',
-                    data: {id: article_id, is_liked: is_liked}
+                    url: '{{ route('sample.add.like') }}',
+                    data: {id: sample_id, is_liked: is_liked}
                 }).done(function (data) {
                     if (data['status'] === 200) {
                         if (data['liked'] === 'disliked') {

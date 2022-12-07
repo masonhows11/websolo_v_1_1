@@ -62,8 +62,10 @@
                                     <input type="hidden" id="article-id" value="{{ $article->id }}">
                                     <div class="mb-3">
                                         <label for="body-comment" class="form-label">دیدگاه</label>
-                                        <textarea class="form-control" placeholder="متن دیدگاه خود را وارد کنید."
-                                                  id="body-comment" rows="6">
+                                        <textarea class="form-control"
+                                                  placeholder="متن دیدگاه خود را وارد کنید."
+                                                  id="body-comment"
+                                                  rows="6">
                                             </textarea>
                                     </div>
                                     <div class="mb-3 mt-3">

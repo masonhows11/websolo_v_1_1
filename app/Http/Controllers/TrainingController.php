@@ -62,7 +62,7 @@ class TrainingController extends Controller
     public function addLike(Request $request)
     {
 
-        $article = Training::findOrFail($request->id);
+        $training = Training::findOrFail($request->id);
         $auth_id = Auth::id();
         $is_like = $request['is_liked'] === 'true';
         try {
@@ -71,7 +71,7 @@ class TrainingController extends Controller
                 ->first();
             if ($user_is_liked) {
                 $user_is_liked->delete();
-                $like_count = DB::table('likes')->count();
+                $like_count = DB::table('likes')->where('training_id',$request->id)->count();
                 return response()->json([
                     'liked' => 'disliked',
                     'count' => $like_count,
@@ -80,10 +80,10 @@ class TrainingController extends Controller
             } else {
                 $newLike = new Like();
                 $newLike->user_id = $auth_id;
-                $newLike->training_id = $article->id;
+                $newLike->training_id = $training->id;
                 $newLike->like = $is_like;
                 $newLike->save();
-                $like_count = DB::table('likes')->count();
+                $like_count = DB::table('likes')->where('training_id',$request->id)->count();
                 return response()->json([
                     'liked' => 'liked',
                     'count' => $like_count,

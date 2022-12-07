@@ -111,13 +111,13 @@ Route::get('/tag/{tag}',[TagController::class,'index'])->name('articles.by.tag')
 
 Route::get('/samples',Samples::class)->name('sample.index');
 Route::get('/sample/{sample}',[SampleController::class,'sample'])->name('sample');
-Route::post('/sample/add-comment',[SampleController::class,'addComment'])->name('article.addComment');
-Route::post('/sample/add-like',[SampleController::class,'addLike'])->name('article.add.like');
+Route::post('/sample/add-comment',[SampleController::class,'addComment'])->name('sample.addComment');
+Route::post('/sample/add-like',[SampleController::class,'addLike'])->name('sample.add.like');
 
 Route::get('/trainings',Trainings::class)->name('training.index');
 Route::get('/training/{training}',[TrainingController::class,'training'])->name('training');
-Route::post('/training/add-comment',[TrainingController::class,'addComment'])->name('article.addComment');
-Route::post('/training/add-like',[TrainingController::class,'addLike'])->name('article.add.like');
+Route::post('/training/add-comment',[TrainingController::class,'addComment'])->name('training.addComment');
+Route::post('/training/add-like',[TrainingController::class,'addLike'])->name('training.add.like');
 
 
 // about us contact us

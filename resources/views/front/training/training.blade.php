@@ -17,9 +17,11 @@
                                 </div>
                             </div>
                             <div class="wk-post-img">
-                                <img src="{{ asset('/storage/training/'.$training->image) }}" class="rounded-4" alt="post-image">
+                                <img src="{{ asset('/storage/training/'.$training->image) }}" class="rounded-4"
+                                     alt="post-image">
                             </div>
-                            <div class="d-flex  justify-content-between mt-2 border border-2 rounded-3 wk-post-author-info">
+                            <div
+                                class="d-flex  justify-content-between mt-2 border border-2 rounded-3 wk-post-author-info">
                                 <div class="wk-post-author-name py-3">
                                     <span class=""><i class="fas fa-pen"></i>{{ $training->user->name }}</span>
                                 </div>
@@ -37,10 +39,19 @@
                                 <div class="col">
                                     <span class="wk-post-view-count">{{ $training->views }}</span>
                                     <i class="fa-solid fa-eye"></i>
-                                    <span class="wk-post-heart-count">{{$like_count}}</span>
-                                    <i wire:click="addLike({{$training->id}})"
-                                       class="{{ $current_like_status ? 'fas' : 'far' }}  fa-heart"
-                                       style="{{ $current_like_status ? $like_color : '' }}"></i>
+                                    <span class="wk-post-heart-count" id="like-count">{{ $training->likes()->count() }}</span>
+                                    @auth
+                                        @if(\Illuminate\Support\Facades\Auth::user()->likes()->where(['training_id'=>$training->id,'like'=>1])->first())
+                                            <i class="fas fa-heart fa-border-style" style="color:tomato" id="add-like"
+                                               data-training="{{ $training->id }}"></i>
+                                        @else
+                                            <i class="far fa-heart" style="color:tomato" id="add-like"
+                                               data-training="{{ $training->id }}"></i>
+                                        @endif
+                                    @else
+                                        <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like-an-auth"
+                                           data-training="{{ $training->id }}"></i>
+                                    @endauth
                                 </div>
                             </div>
 
@@ -48,29 +59,16 @@
 
                         <div class="row d-flex justify-content-center write-comments-section my-4">
                             <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-9">
-                                <form wire:submit.prevent="submit">
-                                    <div>
-                                        @if (session()->has('message'))
-                                            <div
-                                                class="alert alert-success alert-component d-flex justify-content-between">
-                                                {{ session('message') }}
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                            </div>
-                                        @endif
-                                    </div>
+                                <form id="add-comment">
                                     @auth
+                                        <input type="hidden" id="training-id" value="{{ $training->id }}">
                                         <div class="mb-3">
-                                            <label for="message-comment" class="form-label">دیدگاه</label>
+                                            <label for="body-comment" class="form-label">دیدگاه</label>
                                             <textarea class="form-control"
-                                                      wire:model.defer="body"
-                                                      placeholder="متن دیدگاه خود را وارد کنید." id="message-comment"
+                                                      placeholder="متن دیدگاه خود را وارد کنید."
+                                                      id="body-comment"
                                                       rows="6">
-                                    </textarea>
-                                            @error('body')
-                                            <div class="alert alert-danger mt-2">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                             </textarea>
                                         </div>
                                         <div class="mb-3 mt-3">
                                             <button type="sumbit" class="btn btn-success">ثبت دیدگاه</button>
@@ -87,7 +85,6 @@
                                 </form>
                             </div>
                         </div>
-
 
 
                         <div class="row my-5 list-comments-section d-flex">
@@ -128,7 +125,7 @@
 
             function addComment(e) {
                 e.preventDefault();
-                let article_id = document.getElementById('article-id').value;
+                let training_id = document.getElementById('training-id').value;
                 let body = document.getElementById('body-comment').value;
                 $.ajaxSetup({
                     headers: {
@@ -137,8 +134,8 @@
                 });
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route('article.addComment') }}',
-                    data: {id: article_id, body: body}
+                    url: '{{ route('training.addComment') }}',
+                    data: {id: training_id, body: body}
                 }).done(function (data) {
                     if (data['status'] === 422) {
                         Swal.fire({
@@ -180,7 +177,7 @@
 
             $(document).on('click', '#add-like', function (e) {
                 let like_btn = document.getElementById('add-like');
-                let article_id = e.target.getAttribute('data-article');
+                let training_id = e.target.getAttribute('data-training');
                 let is_liked;
                 if (like_btn.classList.contains('far')) {
                     like_btn.classList.remove("far");
@@ -199,9 +196,10 @@
                 });
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route('article.add.like') }}',
-                    data: {id: article_id, is_liked: is_liked}
+                    url: '{{ route('training.add.like') }}',
+                    data: {id: training_id, is_liked: is_liked}
                 }).done(function (data) {
+                    console.log(data);
                     if (data['status'] === 200) {
                         if (data['liked'] === 'disliked') {
                             document.getElementById('like-count').innerText = data['count'];
@@ -210,6 +208,7 @@
                         }
                     }
                 }).fail(function (data) {
+                    console.log(data);
                     if (data['status'] === 500) {
                         Swal.fire({
                             icon: 'danger',

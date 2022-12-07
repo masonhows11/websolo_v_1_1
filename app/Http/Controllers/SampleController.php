@@ -62,7 +62,8 @@ class SampleController extends Controller
                 ->first();
             if ($user_is_liked) {
                 $user_is_liked->delete();
-                $like_count = DB::table('likes')->count();
+                $like_count = DB::table('likes')
+                    ->where('sample_id',$request->id)->count();
                 return response()->json([
                     'liked' => 'disliked',
                     'count' => $like_count,
@@ -74,7 +75,8 @@ class SampleController extends Controller
                 $newLike->sample_id = $article->id;
                 $newLike->like = $is_like;
                 $newLike->save();
-                $like_count = DB::table('likes')->count();
+                $like_count = DB::table('likes')
+                    ->where('sample_id',$request->id)->count();
                 return response()->json([
                     'liked' => 'liked',
                     'count' => $like_count,
