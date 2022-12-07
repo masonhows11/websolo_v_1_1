@@ -59,7 +59,6 @@
                         <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-9">
                             <form id="add-comment">
                                 @auth
-
                                     <input type="hidden" id="article-id" value="{{ $article->id }}">
                                     <div class="mb-3">
                                         <label for="body-comment" class="form-label">دیدگاه</label>
@@ -124,6 +123,46 @@
 
             function addComment(e) {
                 e.preventDefault();
+                let article_id = document.getElementById('article-id').value;
+                let body = document.getElementById('body-comment').value;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('article.addComment') }}',
+                    data: {id: article_id, body: body}
+                }).done(function (data) {
+                    if (data['status'] === 422) {
+                        Swal.fire({
+                            icon: 'info',
+                            text: data['msg']['body'],
+                        });
+                    }
+                    if (data['status'] === 404) {
+                        document.getElementById('body-comment').value = '';
+                        Swal.fire({
+                            icon: 'warning',
+                            text: data['msg'],
+                        });
+                    } else if (data['status'] === 200) {
+                        document.getElementById('body-comment').value = '';
+                        Swal.fire({
+                            icon: 'success',
+                            text: data['msg'],
+                        });
+                    }
+                }).fail(function (data) {
+                    if (data['status'] === 500) {
+                        Swal.fire({
+                            icon: 'danger',
+                            text: 'خطایی رخ داده.',
+                        });
+                    }
+                })
+
             }
 
             // add like
