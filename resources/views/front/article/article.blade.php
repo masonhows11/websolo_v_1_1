@@ -37,7 +37,7 @@
                             <div class="col">
                                 <span class="wk-post-view-count">{{ $article->views }}</span>
                                 <i class="fa-solid fa-eye"></i>
-                                <span class="wk-post-heart-count"></span>
+                                <span class="wk-post-heart-count" id="like-count">0</span>
                                 @auth
                                     <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like"
                                        data-article="{{ $article->id }}"></i>
@@ -112,12 +112,16 @@
     <script>
 
         $(document).ready(function () {
+
+            // add comment
             document.getElementById('add-comment').addEventListener('submit', addComment)
 
             function addComment(e) {
                 e.preventDefault();
             }
-            $(document).on('click','#add-like-an-auth',function (e) {
+
+            // add like
+            $(document).on('click', '#add-like-an-auth', function (e) {
                 Swal.fire({
                     icon: 'info',
                     text: 'برای ثبت like Or dislike ابتدا وارد سایت شوید.',
@@ -148,9 +152,22 @@
                     url: '{{ route('article.add.like') }}',
                     data: {id: article_id, is_liked: is_liked}
                 }).done(function (data) {
-
+                    console.log(data);
+                    if (data['status'] === 200) {
+                        if (data['liked'] === 'disliked') {
+                            document.getElementById('like-count').innerText = data['count'];
+                        } else if (data['liked'] === 'liked') {
+                            document.getElementById('like-count').innerText = data['count'];
+                        }
+                    }
                 }).fail(function (data) {
                     console.log(data);
+                    if(data['status']===500){
+                        Swal.fire({
+                            icon: 'danger',
+                            text: 'خطایی رخ داده.',
+                        });
+                    }
                 })
 
             });

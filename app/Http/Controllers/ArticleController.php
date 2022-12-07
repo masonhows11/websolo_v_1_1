@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -64,24 +65,38 @@ class ArticleController extends Controller
 
         // return $request;
         $article = Article::findOrFail($request->id);
-        $is_like = null;
-        $current_like_status = null;
         $auth_id = Auth::id();
+        $is_like = $request['is_liked'] === 'true';
 
-
-        $is_like = true;
-        $user_is_liked = Like::where('training_id', '=', $request->id)
-            ->where('user_id', '=', $auth_id)
-            ->first();
-        if ($user_is_liked) {
-            $user_is_liked->delete();
-        } else {
-            $newLike = new Like();
-            $newLike->user_id = $auth_id;
-            $newLike->article_id = $article->id;
-            $newLike->like = $is_like;
-            $newLike->save();
+        try {
+            $user_is_liked = Like::where('article_id', '=', $request->id)
+                ->where('user_id', '=', $auth_id)
+                ->first();
+            if ($user_is_liked) {
+                $user_is_liked->delete();
+                $like_count = DB::table('likes')->count();
+                return response()->json([
+                    'liked' => 'disliked',
+                    'count' => $like_count,
+                    'status' => 200],
+                    200);
+            } else {
+                $newLike = new Like();
+                $newLike->user_id = $auth_id;
+                $newLike->article_id = $article->id;
+                $newLike->like = $is_like;
+                $newLike->save();
+                $like_count = DB::table('likes')->count();
+                return response()->json([
+                    'liked' => 'liked',
+                    'count' => $like_count,
+                    'status' => 200],
+                    200);
+            }
+        } catch (\Exception $ex) {
+            return response()->json(['error' => $ex->getMessage(), 'status' => 500], 200);
         }
+
 
     }
 }
