@@ -38,29 +38,21 @@
                                 <span class="wk-post-view-count">{{ $article->views }}</span>
                                 <i class="fa-solid fa-eye"></i>
                                 <span class="wk-post-heart-count"></span>
-                                <i class="far fa-heart" style="" id="add-like" data-article="{{ $article->id }}"></i>
+                                <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like" data-article="{{ $article->id }}"></i>
                             </div>
                         </div>
 
                     </div>
                     <div class="row d-flex justify-content-center write-comments-section my-4">
                         <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-9">
-                            <form>
-                                <div>
-                                    @if (session()->has('message'))
-                                        <div
-                                            class="alert alert-success alert-component d-flex justify-content-between">
-                                            {{ session('message') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                    @endif
-                                </div>
+                            <form id="add-comment">
                                 @auth
+
+                                    <input type="hidden" id="article-id" value="{{ $article->id }}">
                                     <div class="mb-3">
-                                        <label for="message-comment" class="form-label">دیدگاه</label>
+                                        <label for="body-comment" class="form-label">دیدگاه</label>
                                         <textarea class="form-control" placeholder="متن دیدگاه خود را وارد کنید."
-                                                  id="message-comment" rows="6">
+                                                  id="body-comment" rows="6">
                                             </textarea>
                                         @error('body')
                                         <div class="alert alert-danger mt-2">
@@ -112,13 +104,50 @@
 @endsection
 @push('front_custom_scripts')
     <script>
+
         $(document).ready(function () {
+            document.getElementById('add-comment').addEventListener('submit',addComment)
+
+            function addComment(e){
+                e.preventDefault();
+            }
+
             $(document).on('click','#add-like',function (e) {
+                let like_btn = document.getElementById('add-like');
                 let article_id = e.target.getAttribute('data-article');
-                // console.log(article_id);
+
+                let is_liked = false;
+
+                if(like_btn.classList.contains('far')){
+                    like_btn.classList.remove("far");
+                    like_btn.classList.add("fas")
+                    like_btn.style.color = 'tomato';
+                    is_liked = true;
+                }else{
+                    like_btn.classList.remove('fas');
+                    like_btn.classList.add('far')
+                     is_liked = false;
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method:'POST',
+                    url:'{{ route('article.add.like') }}',
+                    data:{id:article_id,is_liked:is_liked}
+                }).done(function (data) {
+                    console.log(data);
+                }).fail(function (data) {
+                    console.log(data);
+                })
+
 
 
             });
+
         });
     </script>
 @endpush

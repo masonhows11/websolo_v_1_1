@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,24 +32,36 @@ class ArticleController extends Controller
 
     public function addComment(Request $request)
     {
-        $request->validate([
+
+     return $request;
+       /* $request->validate([
             'body' => 'required|min:6',
         ],$messages = [
             'body.required' => 'متن دیدگاه را وارد کنید.',
             'body.min' => 'حداقل ۶ کارکتر وارد کنید.',
-        ]);
-        Comment::create([
-            'user_id' => $this->auth_id,
-            'article_id' => $this->training->id,
-            'body' => $this->body,
-        ]);
-        session()->flash('message', 'دیدگاه شما با موفقیت ثبت شد.');
+        ]);*/
+
+      /* $comment =
+           Comment::create([
+            'user_id' => Auth::id(),
+            'article_id' => $request->id,
+            'body' => $request->body,
+        ]);*/
+        $comment =  new Comment();
+        $comment->user_id = Auth::id();
+        $comment->article_id = $request->id;
+        $comment->body = $request->body;
+        $comment->save();
+
+    //   return $comment;
+        return response()->json(['msg'=>'ok','status'=>200],200);
+       /* session()->flash('message', 'دیدگاه شما با موفقیت ثبت شد.');*/
     }
 
     public function addLike(Request $request)
     {
 
-
+        return $request;
        $article = Article::findOrFail($request->id);
         $is_like = null;
         $current_like_status = null;
