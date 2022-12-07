@@ -65,11 +65,6 @@
                                         <textarea class="form-control" placeholder="متن دیدگاه خود را وارد کنید."
                                                   id="body-comment" rows="6">
                                             </textarea>
-                                        @error('body')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
                                     </div>
                                     <div class="mb-3 mt-3">
                                         <button type="sumbit" class="btn btn-success">ثبت دیدگاه</button>

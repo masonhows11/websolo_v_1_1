@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Sample;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Validator;
 
 class SampleController extends Controller
 {
@@ -16,51 +20,71 @@ class SampleController extends Controller
     }
     public function addComment(Request $request)
     {
-        $request->validate([
+
+        //return $request;
+        $validator = Validator::make($request->all(),[
             'body' => 'required|min:6',
-        ],$messages = [
+        ], $messages = [
             'body.required' => 'متن دیدگاه را وارد کنید.',
             'body.min' => 'حداقل ۶ کارکتر وارد کنید.',
         ]);
-        Comment::create([
-            'user_id' => $this->auth_id,
-            'article_id' => $this->training->id,
-            'body' => $this->body,
-        ]);
-        session()->flash('message', 'دیدگاه شما با موفقیت ثبت شد.');
+        if($validator->fails()){
+            return  response()
+                ->json(['msg'=> $validator->errors(),'status'=>422],200);
+        }
+
+        if(!Sample::find($request->id)){
+            return response()
+                ->json(['msg' => 'مقاله مورد نظر وجود ندارد.', 'status' => 404], 200);
+        }
+        try {
+            Comment::create([
+                'user_id' => Auth::id(),
+                'sample_id' => $request->id,
+                'body' => $request->body,
+            ]);
+            return response()->json(['msg' => 'دیدگاه با موفقیت ثبت شد.', 'status' => 200], 200);
+        }catch (\Exception $ex){
+            return response()->json(['msg' => 'خطایی رخ داده.', 'status' => 500], 200);
+        }
+
+
     }
 
     public function addLike(Request $request)
     {
-
-
-        /*$is_like = null;
-        $like_count = null;
-        $current_like_status = null;
-        $auth_id = null;
-
-        if (Auth::check()) {
-            $is_like = true;
-            $user_is_liked = Like::where('training_id', '=', $request->id)
-                ->where('user_id', '=', $this->auth_id)
+        $article = Sample::findOrFail($request->id);
+        $auth_id = Auth::id();
+        $is_like = $request['is_liked'] === 'true';
+        try {
+            $user_is_liked = Like::where('sample_id', '=', $request->id)
+                ->where('user_id', '=', $auth_id)
                 ->first();
             if ($user_is_liked) {
                 $user_is_liked->delete();
-                $like_count--;
-                $current_like_status = false;
-                $like_color = null;
+                $like_count = DB::table('likes')->count();
+                return response()->json([
+                    'liked' => 'disliked',
+                    'count' => $like_count,
+                    'status' => 200],
+                    200);
             } else {
                 $newLike = new Like();
                 $newLike->user_id = $auth_id;
-                $newLike->training_id = $training->id;
+                $newLike->sample_id = $article->id;
                 $newLike->like = $is_like;
                 $newLike->save();
-                $this->like_count++;
-                $this->current_like_status = true;
-                $this->like_color = 'color:tomato';
+                $like_count = DB::table('likes')->count();
+                return response()->json([
+                    'liked' => 'liked',
+                    'count' => $like_count,
+                    'status' => 200],
+                    200);
             }
-        } else {
-            return redirect('/login/form');
-        }*/
+        } catch (\Exception $ex) {
+            return response()->json(['error' => $ex->getMessage(), 'status' => 500], 200);
+        }
+
+
     }
 }
