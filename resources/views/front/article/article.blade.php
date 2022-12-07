@@ -38,7 +38,13 @@
                                 <span class="wk-post-view-count">{{ $article->views }}</span>
                                 <i class="fa-solid fa-eye"></i>
                                 <span class="wk-post-heart-count"></span>
-                                <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like" data-article="{{ $article->id }}"></i>
+                                @auth
+                                    <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like"
+                                       data-article="{{ $article->id }}"></i>
+                                @else
+                                    <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like-an-auth"
+                                       data-article="{{ $article->id }}"></i>
+                                @endauth
                             </div>
                         </div>
 
@@ -106,48 +112,48 @@
     <script>
 
         $(document).ready(function () {
-            document.getElementById('add-comment').addEventListener('submit',addComment)
+            document.getElementById('add-comment').addEventListener('submit', addComment)
 
-            function addComment(e){
+            function addComment(e) {
                 e.preventDefault();
             }
+            $(document).on('click','#add-like-an-auth',function (e) {
+                Swal.fire({
+                    icon: 'info',
+                    text: 'برای ثبت like Or dislike ابتدا وارد سایت شوید.',
+                });
+            })
 
-            $(document).on('click','#add-like',function (e) {
+            $(document).on('click', '#add-like', function (e) {
                 let like_btn = document.getElementById('add-like');
                 let article_id = e.target.getAttribute('data-article');
-
-                let is_liked = false;
-
-                if(like_btn.classList.contains('far')){
+                let is_liked = null;
+                if (like_btn.classList.contains('far')) {
                     like_btn.classList.remove("far");
                     like_btn.classList.add("fas")
                     like_btn.style.color = 'tomato';
                     is_liked = true;
-                }else{
+                } else {
                     like_btn.classList.remove('fas');
                     like_btn.classList.add('far')
-                     is_liked = false;
+                    is_liked = false;
                 }
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
                 $.ajax({
-                    method:'POST',
-                    url:'{{ route('article.add.like') }}',
-                    data:{id:article_id,is_liked:is_liked}
+                    method: 'POST',
+                    url: '{{ route('article.add.like') }}',
+                    data: {id: article_id, is_liked: is_liked}
                 }).done(function (data) {
-                    console.log(data);
+
                 }).fail(function (data) {
                     console.log(data);
                 })
 
-
-
             });
-
         });
     </script>
 @endpush
