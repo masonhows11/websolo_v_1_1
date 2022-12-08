@@ -101,29 +101,11 @@
                     </div>
                     <div class="col my-5 sample-main-image">
                         <img src="{{ asset('storage/samples/' . $sample->image4) }}" class="img-thumbnail h-100"
-                             loading="lazy" alt="sample-gallery-image" data-bs-toggle="modal" id="myModal">
+                             loading="lazy" alt="sample-gallery-image">
                     </div>
                 </div>
 
-                <div class="modal fade" id="myModal">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Modal Heading</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                Modal body..
-                            </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
             @endif
         @endif
@@ -282,7 +264,6 @@
                 })
 
             });
-            // image modal
         });
     </script>
 @endpush

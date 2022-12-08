@@ -5,7 +5,9 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
 // for add bootstrap js file
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // for load jquery
 global.$ = global.jQuery = require('jquery');
