@@ -17,7 +17,9 @@
                                 </div>
                             </div>
                             <div class="wk-post-img">
-                                <img src="{{ asset('/storage/training/'.$training->image) }}" class="rounded-4"
+                                <img src="{{ asset('/storage/training/'.$training->image) }}"
+                                     loading="lazy"
+                                     class="rounded-4"
                                      alt="post-image">
                             </div>
                             <div

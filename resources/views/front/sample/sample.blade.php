@@ -12,8 +12,10 @@
                             class="row row-cols-xxl-2 row-cols-xl-2 row-cols-lg-2 row-cols-md-2 row-cols-1 wk-sample-card mb-3 mt-3">
 
                             <div class="col my-5 wk-sample-main-image">
-                                <img src="{{ asset('storage/samples/' . $sample->main_image) }}" loading="lazy"
-                                     class="img-thumbnail h-100" alt="sample-main-image">
+                                <img src="{{ asset('storage/samples/' . $sample->main_image) }}"
+                                     loading="lazy"
+                                     class="img-thumbnail h-100"
+                                     alt="sample-main-image">
                             </div>
 
                             <div

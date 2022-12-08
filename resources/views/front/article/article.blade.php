@@ -16,7 +16,9 @@
                             </div>
                         </div>
                         <div class="wk-post-img">
-                            <img src="{{ asset('/storage/articles/'.$article->image) }}" class="rounded-4"
+                            <img src="{{ asset('/storage/articles/'.$article->image) }}"
+                                 loading="lazy"
+                                 class="rounded-4"
                                  alt="post-image">
                         </div>
                         <div class="d-flex  justify-content-between mt-2 border border-2 rounded-3 wk-post-author-info">
