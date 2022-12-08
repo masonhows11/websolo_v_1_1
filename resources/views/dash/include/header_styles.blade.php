@@ -6,4 +6,4 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/toastify/toastify.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/ckeditor/plugins/codesnippet/lib/highlight/styles/arta.css') }}">
 <script type="text/javascript" src="{{ asset('assets/plugins/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
