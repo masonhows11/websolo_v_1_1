@@ -918,6 +918,7 @@ body {
     font-size: 1.2rem;
 }
 
+
 /**************** samples page *****************/
 .wk-sample-card .wk-sample-short-desc {
     border-bottom: 3px solid #ECF0F1;
@@ -938,6 +939,9 @@ body {
 
 .wk-sample-like-section span, i {
     margin-left: 15px;
+}
+.ws-sample-info-section{
+    height: auto;
 }
 /**************** paginate section livewire *****************/
 .wk-sample-single-date,

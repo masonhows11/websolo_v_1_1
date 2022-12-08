@@ -11249,6 +11249,10 @@ body {
   margin-left: 15px;
 }
 
+.ws-sample-info-section {
+  height: auto;
+}
+
 /**************** paginate section livewire *****************/
 .wk-sample-single-date,
 .list-comments-section .comment-date,
