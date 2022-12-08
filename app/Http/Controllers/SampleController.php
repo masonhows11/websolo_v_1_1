@@ -30,7 +30,7 @@ class SampleController extends Controller
     public function addComment(Request $request)
     {
 
-        //return $request;
+
         $validator = Validator::make($request->all(),[
             'body' => 'required|min:6',
         ], $messages = [

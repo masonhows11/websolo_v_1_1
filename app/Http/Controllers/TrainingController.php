@@ -31,7 +31,7 @@ class TrainingController extends Controller
     public function addComment(Request $request)
     {
 
-        //return $request;
+
         $validator = Validator::make($request->all(), [
             'body' => 'required|min:6',
         ], $messages = [
@@ -57,7 +57,7 @@ class TrainingController extends Controller
         } catch (\Exception $ex) {
             return response()->json(['msg' => 'خطایی رخ داده.', 'status' => 500], 200);
         }
-        
+
     }
 
     public function addLike(Request $request)

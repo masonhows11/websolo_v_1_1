@@ -158,7 +158,7 @@
             }
 
             // add like
-            $(document).on('click', '#add-like-an-auth', function (e) {
+            $(document).on('click', '#add-like-an-auth', function () {
                 Swal.fire({
                     icon: 'info',
                     text: 'برای ثبت like Or dislike ابتدا وارد سایت شوید.',
