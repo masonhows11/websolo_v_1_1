@@ -101,30 +101,26 @@
                     </div>
                     <div class="col my-5 sample-main-image">
                         <img src="{{ asset('storage/samples/' . $sample->image4) }}" class="img-thumbnail h-100"
-                             loading="lazy" alt="sample-gallery-image" data-bs-toggle="modal" data-bs-target="#myModal">
+                             loading="lazy" alt="sample-gallery-image" data-bs-toggle="modal" id="myModal">
                     </div>
                 </div>
 
                 <div class="modal fade" id="myModal">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <h4 class="modal-title">Modal Heading</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-
                             <!-- Modal body -->
                             <div class="modal-body">
                                 Modal body..
                             </div>
-
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -161,7 +157,6 @@
                 </form>
             </div>
         </div>
-
         <div class="row my-5 list-comments-section d-flex justify-content-center align-items-center">
             @if ($sample->comments->where('sample_id', '=', $sample->id)->where('approved','=',1))
                 @foreach ($sample->comments->where('approved',1) as $comment)
@@ -197,10 +192,8 @@
     <script>
 
         $(document).ready(function () {
-
             // add comment
             document.getElementById('add-comment').addEventListener('submit', addComment)
-
             function addComment(e) {
                 e.preventDefault();
                 let article_id = document.getElementById('sample-id').value;
@@ -289,6 +282,7 @@
                 })
 
             });
+            // image modal
         });
     </script>
 @endpush
