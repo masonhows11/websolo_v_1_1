@@ -17,12 +17,14 @@ class TrainingController extends Controller
 
     public function training(Training $training)
     {
-        /* if (View::where('training_id', $training->id)->where('user_id', Auth::id())->exists()) {
-         } else {
-             View::create(['training_id' => $training->id, 'user_id' => Auth::id()]);
-             $training->views++;
-             $training->save();
-         }*/
+        if (View::where('training_id', $training->id)->where('user_id', Auth::id())->exists())
+        {
+
+        } else {
+            View::create(['training_id' => $training->id, 'user_id' => Auth::id()]);
+            $training->views++;
+            $training->save();
+        }
         return view('front.training.training')->with(['training' => $training]);
     }
 
@@ -30,18 +32,18 @@ class TrainingController extends Controller
     {
 
         //return $request;
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'body' => 'required|min:6',
         ], $messages = [
             'body.required' => 'متن دیدگاه را وارد کنید.',
             'body.min' => 'حداقل ۶ کارکتر وارد کنید.',
         ]);
-        if($validator->fails()){
-            return  response()
-                ->json(['msg'=> $validator->errors(),'status'=>422],200);
+        if ($validator->fails()) {
+            return response()
+                ->json(['msg' => $validator->errors(), 'status' => 422], 200);
         }
 
-        if(!Training::find($request->id)){
+        if (!Training::find($request->id)) {
             return response()
                 ->json(['msg' => 'مقاله مورد نظر وجود ندارد.', 'status' => 404], 200);
         }
@@ -52,11 +54,10 @@ class TrainingController extends Controller
                 'body' => $request->body,
             ]);
             return response()->json(['msg' => 'دیدگاه با موفقیت ثبت شد.', 'status' => 200], 200);
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             return response()->json(['msg' => 'خطایی رخ داده.', 'status' => 500], 200);
         }
-
-
+        
     }
 
     public function addLike(Request $request)
@@ -71,7 +72,7 @@ class TrainingController extends Controller
                 ->first();
             if ($user_is_liked) {
                 $user_is_liked->delete();
-                $like_count = DB::table('likes')->where('training_id',$request->id)->count();
+                $like_count = DB::table('likes')->where('training_id', $request->id)->count();
                 return response()->json([
                     'liked' => 'disliked',
                     'count' => $like_count,
@@ -83,7 +84,7 @@ class TrainingController extends Controller
                 $newLike->training_id = $training->id;
                 $newLike->like = $is_like;
                 $newLike->save();
-                $like_count = DB::table('likes')->where('training_id',$request->id)->count();
+                $like_count = DB::table('likes')->where('training_id', $request->id)->count();
                 return response()->json([
                     'liked' => 'liked',
                     'count' => $like_count,

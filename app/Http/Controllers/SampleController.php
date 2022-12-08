@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Sample;
+use App\Models\view;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,14 @@ class SampleController extends Controller
     //
     public function sample(Sample $sample)
     {
+        if (View::where('sample_id', $sample->id)->where('user_id', Auth::id())->exists())
+        {
+
+        } else {
+            View::create(['sample_id' => $sample->id, 'user_id' => Auth::id()]);
+            $sample->views++;
+            $sample->save();
+        }
         return view('front.sample.sample')
             ->with(['sample'=>$sample]);
     }
