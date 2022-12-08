@@ -73,6 +73,10 @@ use App\Http\Controllers\TagController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
+Route::get('/storage-link',function(){
+    symlink(storage_path('app/public'),$_SERVER['DOCUMENT_ROOT'].'/storage');
+});
+
 // authentication & authorize
 Route::get('/login/form', [LoginController::class, 'loginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');//->middleware(['throttle:3,1']);
