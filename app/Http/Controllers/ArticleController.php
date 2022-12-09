@@ -44,8 +44,6 @@ class ArticleController extends Controller
 
     public function addComment(Request $request)
     {
-
-
        $validator = Validator::make($request->all(),[
             'body' => 'required|min:6',
         ], $messages = [
@@ -69,8 +67,6 @@ class ArticleController extends Controller
         }catch (\Exception $ex){
             return response()->json(['msg' => 'خطایی رخ داده.', 'status' => 500], 200);
         }
-
-
     }
 
     public function addLike(Request $request)
@@ -85,7 +81,9 @@ class ArticleController extends Controller
                 ->first();
             if ($user_is_liked) {
                 $user_is_liked->delete();
-                $like_count = DB::table('likes')->count();
+                $like_count = DB::table('likes')
+                    ->where('article_id',$request->id)
+                    ->count();
                 return response()->json([
                     'liked' => 'disliked',
                     'count' => $like_count,
@@ -97,7 +95,9 @@ class ArticleController extends Controller
                 $newLike->article_id = $article->id;
                 $newLike->like = $is_like;
                 $newLike->save();
-                $like_count = DB::table('likes')->count();
+                $like_count = DB::table('likes')
+                    ->where('article_id',$request->id)
+                    ->count();
                 return response()->json([
                     'liked' => 'liked',
                     'count' => $like_count,
