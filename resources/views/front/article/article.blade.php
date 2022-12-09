@@ -50,8 +50,7 @@
                                            data-article="{{ $article->id }}"></i>
                                     @endif
                                 @else
-                                    <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like-an-auth"
-                                       data-article="{{ $article->id }}"></i>
+                                    <i class="far fa-heart fa-border-style" style="color:tomato" id="add-like-un-auth"></i>
                                 @endauth
                             </div>
                         </div>
@@ -160,7 +159,7 @@
             }
 
             // add like
-            $(document).on('click', '#add-like-an-auth', function () {
+            $(document).on('click', '#add-like-un-auth', function () {
                 Swal.fire({
                     icon: 'info',
                     text: 'برای ثبت like Or dislike ابتدا وارد سایت شوید.',

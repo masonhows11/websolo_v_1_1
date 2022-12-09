@@ -55,7 +55,7 @@ class AdminValidateController extends Controller
             $admin->code = $token;
             $admin->save();
             // for send code via sms
-            // $admin->notify(new AdminAuthNotification($admin));
+             $admin->notify(new AdminAuthNotification($admin));
             return response()->json(['message' => 'کد فعال سازی مجددا ارسال شد.', 'status' => 200], 200);
         } catch (\Exception $ex) {
             return response()->json(['message' => $ex->getMessage(), 'status' => 500], 500);
