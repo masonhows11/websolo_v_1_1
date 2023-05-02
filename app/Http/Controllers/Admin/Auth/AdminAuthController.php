@@ -24,7 +24,7 @@ class AdminAuthController extends Controller
         $request->validate([
             'mobile' => ['required','exists:admins,mobile',new MobileValidationRule],
         ],$messages =[
-            'mobile.exists' => 'کاربری با شماره موبایل وارد شده وجود ندارد',
+            'mobile.exists' => 'کاربری با ایمیل  وارد شده وجود ندارد',
             'mobile.required' => 'شماره موبایل خود را وارد کنید',
         ]);
 
@@ -36,7 +36,7 @@ class AdminAuthController extends Controller
             session(['admin_mobile'=>$admin->mobile]);
 
 
-            session()->flash('success', 'کد فعال سازی به شماره موبایل ارسال شد');
+            session()->flash('success', 'کد فعال سازی به ایمیل ارسال شد');
             return redirect()->route('admin.validate.mobile.form');
         }catch (\Exception $ex)
         {
@@ -47,7 +47,7 @@ class AdminAuthController extends Controller
     public function logOut(Request $request)
     {
         $admin = Auth::guard('admin')->user();
-        $admin->code = null;
+        $admin->token = null;
         $admin->code_verified_at = null;
         $admin->remember_token = null;
         $admin->save();

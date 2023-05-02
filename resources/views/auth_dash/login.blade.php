@@ -24,11 +24,11 @@
                             <h1 class="text-dark mb-3">ورود به پنل مدیریت</h1>
                         </div>
                         <div class="fv-row mb-10">
-                            <label class="form-label fs-6 fw-bolder text-dark" for="mobile">شماره موبایل</label>
+                            <label class="form-label fs-6 fw-bolder text-dark" for="mobile">ایمیل</label>
                             <input class="form-control form-control-lg form-control-solid"
-                                   id="mobile"
-                                   type="text"
-                                   name="mobile" autocomplete="off"/>
+                                   id="email"
+                                   type="email"
+                                   name="email" autocomplete="off"/>
                             @error('mobile')
                             <div class="alert alert-danger mt-2">
                                 {{ $message }}
