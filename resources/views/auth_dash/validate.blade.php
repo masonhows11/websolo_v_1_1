@@ -24,8 +24,8 @@
                             <h1 class="text-dark mb-3">ورود دو مرحله ای</h1>
                             <div class="text-muted fw-bold fs-5 mb-5">وارد کردن کد تایید ارسال شده به شما</div>
                         </div>
-                        @if(session()->exists('admin_mobile'))
-                            <input type="hidden"  id="number" value="{{ session()->get('admin_mobile') }}">
+                        @if(session()->exists('admin_email'))
+                            <input type="hidden"  id="email" value="{{ session()->get('admin_email') }}">
                         @endif
                         <div class="mb-10 px-md-10">
                             <label for="mobile" class="form-label fs-6 fw-bolder text-dark">شماره موبایل</label>

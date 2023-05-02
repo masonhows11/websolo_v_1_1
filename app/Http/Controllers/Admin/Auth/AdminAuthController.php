@@ -30,10 +30,11 @@ class AdminAuthController extends Controller
 
         try {
             $code = GenerateToken::generateToken();
-            $admin = Admin::where('mobile',$request->mobile)->first();
+            $admin = Admin::where('email',$request->email)->first();
             $admin->code = $code;
             $admin->save();
-            session(['admin_mobile'=>$admin->mobile]);
+
+            session(['admin_email'=>$admin->email]);
 
 
             session()->flash('success', 'کد فعال سازی به ایمیل ارسال شد');

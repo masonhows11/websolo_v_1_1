@@ -16,32 +16,36 @@ class AdminValidateController extends Controller
     //
     public function validateMobileForm()
     {
-            return view('auth_dash.validate');
+        return view('auth_dash.validate');
     }
-    public function validateMobile(Request $request){
+
+    public function validateMobile(Request $request)
+    {
 
         $request->validate([
-            'mobile' => ['required','exists:admins',new MobileValidationRule],
-            'code' => ['required','digits:6']
-        ],$messages = [
+            'mobile' => ['required', 'exists:admins', new MobileValidationRule],
+            'code' => ['required', 'digits:6']
+        ], $messages = [
             'mobile.exists' => 'کاربری با شماره موبایل وارد شده وجود ندارد',
             'mobile.required' => 'شماره موبایل خود را وارد کنید',
             'code.required' => 'کد فعال سازی را وارد کنید',
             'code.digits' => 'کد فعال سازی باید معتبر نمی باشد',
         ]);
 
-        $validated =  CheckExpireToken::checkAdminToken($request->code, $request->mobile);
-        if($validated == false){
-            session()->flash('error','کد فعال سازی معتبر نمی باشد');
+        $validated = CheckExpireToken::checkAdminToken($request->token, $request->email);
+        if ($validated == false) {
+            session()->flash('error', 'کد فعال سازی معتبر نمی باشد');
             session()->forget('admin_mobile');
             return redirect()->route('admin.Login.form');
         }
-        if ($admin = Admin::where(['mobile'=>$request->mobile,'code'=>$request->code])->first()){
+        if ($admin = Admin::where(['mobile' => $request->mobile, 'code' => $request->token])->first()) {
+
             Auth::guard('admin')->login($admin, $request->remember);
-            session()->forget('admin_mobile');
-            return  redirect()->route('admin.dashboard');
+            session()->forget('admin_email');
+            
+            return redirect()->route('admin.dashboard');
         }
-        session()->forget('admin_mobile');
+        session()->forget('admin_email');
         return redirect()->route('admin.Login.form');
     }
 
@@ -49,9 +53,9 @@ class AdminValidateController extends Controller
     {
 
         try {
-            $admin = Admin::where('mobile', $request->number)->first();
+            $admin = Admin::where('email', $request->email)->first();
             $token = GenerateToken::generateToken();
-            $admin->code = $token;
+            $admin->token = $token;
             $admin->save();
 
             return response()->json(['message' => 'کد فعال سازی مجددا ارسال شد.', 'status' => 200], 200);

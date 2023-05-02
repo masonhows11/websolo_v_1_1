@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Date;
 class CheckExpireToken
 {
 
-    public static function checkAdminToken($code,$mobile)
+    public static function checkAdminToken($token,$email)
     {
         try {
-            $admin = Admin::where('mobile',$mobile)
-                ->where('code',$code)
+            $admin = Admin::where('email',$email)
+                ->where('token',$token)
                 ->first();
             $expired = Carbon::parse($admin->updated_at)->addMinutes(1)
                 ->isPast();
