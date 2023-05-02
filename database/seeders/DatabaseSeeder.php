@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'naeem',
             'last_name' => 'soltany',
             'mobile' => '09917230927',
+            'email' => 'mason.hows11@gmail.com',
             //'token'=>  mt_rand(111111,999999),
             //'token_verified_at' => Carbon::now(),
         ]);
