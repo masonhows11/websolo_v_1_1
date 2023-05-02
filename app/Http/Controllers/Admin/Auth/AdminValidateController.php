@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Models\User;
-use App\Notifications\AdminAuthNotification;
+
 use App\Rules\MobileValidationRule;
 use App\Services\CheckExpireToken;
 use App\Services\GenerateToken;
@@ -54,8 +53,7 @@ class AdminValidateController extends Controller
             $token = GenerateToken::generateToken();
             $admin->code = $token;
             $admin->save();
-            // for send code via sms
-             $admin->notify(new AdminAuthNotification($admin));
+
             return response()->json(['message' => 'کد فعال سازی مجددا ارسال شد.', 'status' => 200], 200);
         } catch (\Exception $ex) {
             return response()->json(['message' => $ex->getMessage(), 'status' => 500], 500);

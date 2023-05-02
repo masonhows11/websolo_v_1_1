@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Notifications\AdminAuthNotification;
+
 use App\Rules\MobileValidationRule;
 use App\Services\GenerateToken;
 use Illuminate\Http\Request;
@@ -34,7 +34,8 @@ class AdminAuthController extends Controller
             $admin->code = $code;
             $admin->save();
             session(['admin_mobile'=>$admin->mobile]);
-            $admin->notify(new AdminAuthNotification($admin));
+
+
             session()->flash('success', 'کد فعال سازی به شماره موبایل ارسال شد');
             return redirect()->route('admin.validate.mobile.form');
         }catch (\Exception $ex)
