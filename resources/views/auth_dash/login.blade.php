@@ -29,7 +29,7 @@
                                    id="email"
                                    type="email"
                                    name="email" autocomplete="off"/>
-                            @error('mobile')
+                            @error('email')
                             <div class="alert alert-danger mt-2">
                                 {{ $message }}
                             </div>

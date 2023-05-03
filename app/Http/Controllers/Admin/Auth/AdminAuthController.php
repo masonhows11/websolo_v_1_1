@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 
-use App\Rules\MobileValidationRule;
+
 use App\Services\GenerateToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,10 +22,11 @@ class AdminAuthController extends Controller
     public function loginAdmin(Request $request){
 
         $request->validate([
-            'mobile' => ['required','exists:admins,mobile',new MobileValidationRule],
+            'email' => ['required','exists:admins,email','email'],
         ],$messages =[
-            'mobile.exists' => 'کاربری با ایمیل  وارد شده وجود ندارد',
-            'mobile.required' => 'شماره موبایل خود را وارد کنید',
+            'email.email' => 'ایمیل وارد شده معتبر نمی باشد',
+            'email.exists' => 'کاربری با ایمیل  وارد شده وجود ندارد',
+            'email.required' => 'ایمیل خود را وارد کنید',
         ]);
 
         try {
