@@ -11,14 +11,17 @@ class AdminAuthNotification extends Notification
 {
     use Queueable;
 
+    protected $token;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $token
      */
-    public function __construct()
+    public function __construct($token)
     {
         //
+        $this->token = $token;
     }
 
     /**
@@ -41,9 +44,10 @@ class AdminAuthNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting('hello')
+                    ->line('active code for authentication.')
+                    ->line($this->token)
+                    ->line('Thank you dear user!');
     }
 
     /**

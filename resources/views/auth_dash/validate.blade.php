@@ -28,24 +28,24 @@
                             <input type="hidden"  id="email" value="{{ session()->get('admin_email') }}">
                         @endif
                         <div class="mb-10 px-md-10">
-                            <label for="mobile" class="form-label fs-6 fw-bolder text-dark">شماره موبایل</label>
+                            <label for="email" class="form-label fs-6 fw-bolder text-dark">ایمیل</label>
                             <input class="form-control form-control-lg form-control-solid"
-                                   name="mobile"
-                                   id="mobile"
+                                   name="email"
+                                   id="email"
                                    type="text"  />
                         </div>
-                        @error('mobile')
+                        @error('email')
                         <div class="alert fv-row alert-danger mb-10">
                             {{ $message }}
                         </div>
                         @enderror
                         <div class="mb-10 px-md-10">
-                            <label class="fw-bolder text-start text-dark fs-6 mb-1 ms-1" for="code">کد فعال سازی را وارد کنید</label>
+                            <label class="fw-bolder text-start text-dark fs-6 mb-1 ms-1" for="token">کد فعال سازی را وارد کنید</label>
                             <input class="form-control form-control-lg form-control-solid"
-                                   id="code"
+                                   id="token"
                                    type="text"
-                                   name="code"/>
-                            @error('code')
+                                   name="token"/>
+                            @error('token')
                             <div class="alert alert-danger mt-2">
                                 {{ $message }}
                             </div>

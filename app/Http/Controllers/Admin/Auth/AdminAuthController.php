@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-
-
+use App\Notifications\AdminAuthNotification;
 use App\Services\GenerateToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +29,12 @@ class AdminAuthController extends Controller
         ]);
 
         try {
-            $code = GenerateToken::generateToken();
+            $token = GenerateToken::generateToken();
             $admin = Admin::where('email',$request->email)->first();
-            $admin->code = $code;
+            $admin->token = $token;
             $admin->save();
+
+            $admin->notify( new AdminAuthNotification($token));
 
             session(['admin_email'=>$admin->email]);
 
@@ -53,8 +54,11 @@ class AdminAuthController extends Controller
         $admin->code_verified_at = null;
         $admin->remember_token = null;
         $admin->save();
+
         Auth::guard('admin')->logout();
+
         $request->session()->invalidate();
+
         return redirect()->route('admin.login.form');
     }
 
