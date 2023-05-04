@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TestMail;
 use App\Models\Admin;
 use App\Notifications\AdminAuthNotification;
 use App\Services\GenerateToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AdminAuthController extends Controller
 {
@@ -37,6 +39,7 @@ class AdminAuthController extends Controller
             $admin->notify( new AdminAuthNotification($token));
 
             session(['admin_email'=>$admin->email]);
+
 
 
             session()->flash('success', 'کد فعال سازی به ایمیل ارسال شد');
