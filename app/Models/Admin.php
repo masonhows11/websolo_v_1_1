@@ -52,10 +52,7 @@ class Admin extends Authenticatable
         'token_verified_at' => 'datetime',
     ];
 
-    public function routeNotificationForRayganSms()
-    {
-        return $this->mobile;
-    }
+    
 
     /*public static function getPermissionIds()
     {
