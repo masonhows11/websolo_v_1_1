@@ -78,6 +78,7 @@ Route::get('/storage-link',function(){
 });
 
 // authentication & authorize
+
 Route::get('/login/form', [LoginController::class, 'loginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');//->middleware(['throttle:3,1']);
 Route::get('/register/form', [RegisterController::class, 'registerForm'])->name('register.form');
@@ -130,11 +131,13 @@ Route::get('/contact-us',ContactUs::class)->name('contactUs');
 
 // admin
 Route::prefix('admin')->group(function () {
+
     Route::get('/login/form', [AdminAuthController::class, 'loginAdminForm'])->name('admin.login.form');
     Route::post('/login', [AdminAuthController::class, 'loginAdmin'])->name('admin.login');
     Route::get('/validate/mobile/form', [AdminValidateController::class, 'validateMobileForm'])->name('admin.validate.mobile.form');
     Route::post('/validate/mobile', [AdminValidateController::class, 'validateMobile'])->name('admin.validate.mobile');
     Route::post('/resend/code', [AdminValidateController::class, 'resendCode'])->name('admin.resend.code');
+
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin','verify_admin','role:admin|admin'])->group(function () {

@@ -33,20 +33,20 @@ class AdminValidateController extends Controller
         ]);
 
         $validated = CheckExpireToken::checkAdminToken($request->token, $request->email);
+
         if ($validated == false) {
             session()->flash('error', 'کد فعال سازی معتبر نمی باشد');
-            session()->forget('admin_mobile');
-            return redirect()->route('admin.Login.form');
-        }
-        if ($admin = Admin::where(['mobile' => $request->mobile, 'code' => $request->token])->first()) {
-
+            session()->forget('admin_email');
+            return redirect()->route('admin.login.form');
+        } elseif ($validated == false) {
+            $admin = Admin::where(['mobile' => $request->mobile, 'token' => $request->token])->first()
             Auth::guard('admin')->login($admin, $request->remember);
             session()->forget('admin_email');
 
             return redirect()->route('admin.dashboard');
         }
         session()->forget('admin_email');
-        return redirect()->route('admin.Login.form');
+        return redirect()->route('admin.login.form');
     }
 
     public function resendCode(Request $request)
