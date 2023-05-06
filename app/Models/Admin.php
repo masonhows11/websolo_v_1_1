@@ -52,7 +52,7 @@ class Admin extends Authenticatable
         'token_verified_at' => 'datetime',
     ];
 
-    
+
 
     /*public static function getPermissionIds()
     {

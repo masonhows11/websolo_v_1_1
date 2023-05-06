@@ -42,7 +42,7 @@ class AdminValidateController extends Controller
 
         } elseif ($validated == true) {
 
-            $admin = Admin::where(['mobile' => $request->mobile, 'token' => $request->token])->first();
+            $admin = Admin::where(['email' => $request->email, 'token' => $request->token])->first();
             Auth::guard('admin')->login($admin, $request->remember);
             session()->forget('admin_email');
 
