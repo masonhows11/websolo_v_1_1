@@ -18,8 +18,7 @@ class CheckExpireToken
             $admin = Admin::where('email',$email)
                 ->where('token',$token)
                 ->first();
-            $expired = Carbon::parse($admin->updated_at)->addMinutes(1)
-                ->isPast();
+            $expired = Carbon::parse($admin->updated_at)->addMinutes(1)->isPast();
             if($expired){
                 return false;
             }
